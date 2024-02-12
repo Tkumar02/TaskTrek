@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "TaskTrekWeb",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tasktrek-79ad7": {
+      "hosting": {
+        "TaskTrekWeb": [
+          "tasktrek-79ad7"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tasktrek-79ad7"
+  }
+}
