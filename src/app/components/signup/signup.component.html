@@ -1,0 +1,5 @@
+<form>
+    <input name="email" [(ngModel)]="userEmail" type="email" placeholder="Please enter email">
+    <input name="password" type="password" [(ngModel)]="userPassword" placeholder="Please enter password">
+    <button type="submit" (click)="signUp(userEmail,userPassword)">Sign up</button>
+</form>

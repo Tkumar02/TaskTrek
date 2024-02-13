@@ -1,2 +1,4 @@
+<h3 *ngIf="hide">Welcome {{email}}</h3>
 <app-nav></app-nav>
+<app-login *ngIf="!hide" (sendToApp)="emailReceived($event)"></app-login>
 <router-outlet></router-outlet>
