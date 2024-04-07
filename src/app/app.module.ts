@@ -16,6 +16,10 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { ProfileComponent } from './components/fitness/profile/profile.component';
+import { CalendarComponent } from './components/fitness/calendar/calendar.component';
+import { PlanTodayComponent } from './components/fitness/plan-today/plan-today.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 @NgModule({
@@ -26,7 +30,11 @@ import { SignupComponent } from './components/signup/signup.component';
     WeightComponent,
     FitnessHomeComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ProfileComponent,
+    CalendarComponent,
+    PlanTodayComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
