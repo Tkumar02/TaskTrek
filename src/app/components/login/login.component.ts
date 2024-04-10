@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { User, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 @Component({
@@ -8,17 +9,19 @@ import { User, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "f
 })
 
 export class LoginComponent {
+
+  constructor(private router: Router) {}
+
   auth = getAuth();
   email: string = '';
   pw: string = '';
   user: User | null = null;
-  @Output() sendToApp = new EventEmitter<string>();
 
   ngOnInit():void {
     onAuthStateChanged(this.auth, (user)=>{
       this.user=user;
       if(user){
-        this.sendUser();
+        console.log(user);
       }
     })
   }
@@ -28,7 +31,12 @@ export class LoginComponent {
       .then((userCredential) => {
     // Signed in
         const user = userCredential.user;
-        console.log(user.email)
+        if(user.email=='admin@mail.com'){
+          this.router.navigate(['/admin'])
+        }
+        else(
+          this.router.navigate(['/fitness-home'])
+        )
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -36,9 +44,4 @@ export class LoginComponent {
       console.log('ERROR TA')
     });
   }
-  
-  sendUser(){
-    this.sendToApp.emit(this.email)
-  }
-
 }

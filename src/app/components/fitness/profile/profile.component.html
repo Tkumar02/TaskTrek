@@ -1,1 +1,27 @@
-<p>profile works!</p>
+<h1 class="text-center" *ngIf="showName">Welcome to your profile page {{userDetails.userName}}</h1>
+<form action="submit" class="d-flex flex-column justify-content-center align-items-center gap-3">
+    <div>
+        <h3 class="text-center">Enter Weight</h3>
+        <input name="weight" [(ngModel)]="weight" type="number" placeholder="weight in kg">
+    </div>
+    <div>
+        <h3 class="text-center">Enter height</h3>
+        <input name="height" [(ngModel)]="height" type="number" placeholder="height in cm">
+    </div>
+    <div>
+        <h3 class="text-center">Enter Age</h3>
+        <input name="age" [(ngModel)]="age" type="number" placeholder="Age">
+    </div>
+    <div class="d-flex flex-column align-items-center">
+        <h3>Enter Gender</h3>
+        <select name="gender" [(ngModel)]="gender">
+            <option value="m">Male</option>
+            <option value="f">Female</option>
+        </select>
+    </div>
+    <button (click)="calculateBMR()">Submit</button>
+    <div *ngIf="bmr">
+        <h3>Your Basal metabolic rate is: {{bmr | number:'1.0-0'}}</h3>
+    </div>
+</form>
+

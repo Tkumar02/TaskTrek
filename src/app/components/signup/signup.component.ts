@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { AddUserService } from 'src/app/services/add-user.service';
 
 @Component({
   selector: 'app-signup',
@@ -7,12 +8,21 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
+
+  constructor(private userService:AddUserService) { }
+
   auth = getAuth()
-  userEmail: string = '';
-  userPassword: string = ''
+  userPassword: string = '';
+  confirmPassword: string = '';
+
+  userForm = {
+    userEmail:'',
+    firstName: ''
+  }
 
   signUp(email:string,password:string){
-    createUserWithEmailAndPassword(this.auth,email,password)
+    if(this.confirmPassword==this.userPassword)
+    {createUserWithEmailAndPassword(this.auth,email,password)
       .then((userCredential)=>{
         const user = userCredential.user
         console.log('successfully signed up!')
@@ -22,5 +32,13 @@ export class SignupComponent {
         const errorMessage = error.message;
         console.log(errorCode,errorMessage)
       })
+    this.userService.addUser(this.userForm)
+    alert('You have successfully signed up')
+    }
+    else{
+      alert('Passwords do not match')
+      this.userPassword = '';
+      this.confirmPassword = '';
+    }
   }
 }
