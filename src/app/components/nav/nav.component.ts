@@ -16,18 +16,23 @@ export class NavComponent {
     private sharedService: SharedDataService,  
   ) { }
 
+  disableLoginSignup: boolean = false;
+  disableSignOut: boolean = true;
   userInfo:  any;
   userEmail = '';
   userName = '';
   showName: boolean = false;
   userDetails = {
     userName: '',
-    userId: ''
+    userId: '',
+    userEmail: '',
   }
 
   ngOnInit(): void{
     this.afAuth.authState.subscribe(user=>{
       if(user && user.email){
+        this.disableLoginSignup = true
+        this.disableSignOut = false
         this.userEmail=user.email
         console.log(this.userEmail)
         this.afUser.loadUser(this.userEmail).subscribe(val=>{
@@ -37,6 +42,7 @@ export class NavComponent {
             this.showName = true
             this.userDetails.userName = this.userName
             this.userDetails.userId = user.uid
+            this.userDetails.userEmail = this.userEmail
             this.sharedService.setUserDetails(this.userDetails)
           }
         })
@@ -48,6 +54,7 @@ export class NavComponent {
     this.afAuth.signOut()
       .then(()=>{
         alert('You have successfully signed out!')
+        this.disableSignOut = true;
         this.userName = ''
         this.userInfo = ''
         this.userEmail = ''

@@ -1,6 +1,14 @@
 <h1>Plan Page</h1>
 <form *ngIf="!hide" action="submit">
 <div>
+    <div class="d-flex flex-column align-items-center">
+        <h3>Select User</h3>
+        <select [(ngModel)]="member" name="user">
+            <option *ngFor="let user of users" 
+            [value]="user.userEmail"
+            >{{user.firstName}} - {{user.userEmail}}</option>
+        </select>
+    </div>
     <div>
         <label class="me-2" for="foodDate">Date: </label>
         <input type="date" name="foodDate" [(ngModel)]="formData.foodDate">
@@ -9,19 +17,19 @@
         <label class="me-2" for="breakfast">Breakfast: </label>
         <input type="text" name="breakfast" [(ngModel)]="formData.breakfastFood">
         <label class="ms-3 me-2" for="breakfast_kcal">Breakfast Kcal: </label>
-        <input type="number" name="breakfast_kcal">
+        <input type="number" [(ngModel)]="formData.breakfastKcal" name="breakfast_kcal">
     </div>
     <div>
         <label class="me-4" for="lunch">Lunch: </label>
         <input class="ms-1" type="text" name="lunch" [(ngModel)]="formData.lunchFood">
         <label class="ms-4 me-2" for="lunch_kcal">Lunch Kcal: </label>
-        <input class="ms-3" type="number" name="lunch_kcal">
+        <input class="ms-3" [(ngModel)]="formData.lunchKcal" type="number" name="lunch_kcal">
     </div>
     <div>
         <label class="me-4" for="dinner">Dinner: </label>
         <input class="ms-1" type="text" name="dinner" [(ngModel)]="formData.dinnerFood">
         <label class="ms-4 me-2" for="dinner_kcal">Dinner Kcal: </label>
-        <input class="ms-3" type="number" name="dinner_kcal">
+        <input class="ms-3" type="number" [(ngModel)]="formData.dinnerKcal" name="dinner_kcal">
     </div>
     <button (click)="showBreakfast()">Submit</button>
 </div>

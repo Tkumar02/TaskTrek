@@ -1,5 +1,5 @@
-<h1 class="text-center" *ngIf="showName">Welcome to your profile page {{userDetails.userName}}</h1>
-<form action="submit" class="d-flex flex-column justify-content-center align-items-center gap-3">
+<h1 class="text-center mb-3" *ngIf="showName">Welcome to your profile page {{userDetails.userName}}</h1>
+<form *ngIf="!profileExists" action="submit" class="d-flex flex-column justify-content-center align-items-center gap-3">
     <div>
         <h3 class="text-center">Enter Weight</h3>
         <input name="weight" [(ngModel)]="weight" type="number" placeholder="weight in kg">
@@ -24,4 +24,11 @@
         <h3>Your Basal metabolic rate is: {{bmr | number:'1.0-0'}}</h3>
     </div>
 </form>
+
+<div *ngIf="profileExists" class="d-flex flex-column align-items-center gap-3">
+    <h2>Current Weight: {{currentWeight}}</h2>
+    <h2 class="text-center">Last updated: {{lastUpdated}}</h2>
+    <h2>Current BMR: {{currentBMR}}</h2>
+    <button (click)="showForm()">Update Profile</button>
+</div>
 

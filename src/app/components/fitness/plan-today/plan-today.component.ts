@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./plan-today.component.css']
 })
 export class PlanTodayComponent {
-
+  ngOnInit(): void {
+    const todayDate = new Date()
+    console.log(todayDate.toISOString().split('T')[0])
+  }
 }

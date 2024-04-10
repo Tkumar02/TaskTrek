@@ -8,7 +8,7 @@ import { SharedDataService } from 'src/app/services/shared-data.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  constructor(private shareData: SharedDataService, private addProfile: AddFoodDataService) {}
+  constructor(private shareData: SharedDataService, private userData: AddFoodDataService) {}
   
   userDetails: any
   showName: boolean = false
@@ -17,20 +17,41 @@ export class ProfileComponent {
   gender: string = '';
   age: number = 0;
   bmr: number = 0;
+  profileExists: boolean = false;
+  currentWeight = 0;
+  currentBMR = '';
+  existingProfile: any;
+  lastUpdated = new Date
   profile = {
     name: '',
+    email: '',
     id: '',
     weight:0,
-    bmr: 0
+    bmr: 0,
+    date: new Date()
   }
 
   ngOnInit(): void{
     this.userDetails = this.shareData.getUserDetails()
+    //console.log(this.userDetails, 'profile component')
     this.profile.name = this.userDetails.userName;
+    this.profile.email = this.userDetails.userEmail;
     this.profile.id = this.userDetails.userId;
+    this.profile.date = new Date()
     if(this.userDetails.userName){
       this.showName = true;
     }
+    //console.log(this.userDetails.userEmail)
+    this.userData.loadProfile(this.userDetails.userEmail).subscribe(val=>{
+      this.existingProfile = val[0]
+      this.profileExists = true
+      this.currentWeight = this.existingProfile.weight;
+      this.currentBMR = this.existingProfile.bmr.toFixed(0);
+      this.lastUpdated = this.existingProfile.date.toISOString().split('T')[0];
+      if(this.existingProfile){
+        this.profileExists = true;
+      }
+    })
   }
 
   calculateBMR(){
@@ -42,6 +63,10 @@ export class ProfileComponent {
     }
     this.profile.weight = this.weight
     this.profile.bmr = this.bmr
-    this.addProfile.addProfile(this.profile)
+    this.userData.addProfile(this.profile)
+  }
+
+  showForm(){
+    this.profileExists = false
   }
 }

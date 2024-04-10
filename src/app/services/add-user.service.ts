@@ -16,6 +16,10 @@ export class AddUserService {
     return this.afs.collection('User',ref=>ref.where('userEmail','==',userEmail)).valueChanges()
   }
 
+  loadProfile(userEmail:any){
+    return this.afs.collection('Profile',ref=>ref.where('email','==',userEmail)).valueChanges()
+  }
+
   loadUsers(){
     return this.afs.collection('User').valueChanges()
   }
