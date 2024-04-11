@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { AddFoodDataService } from 'src/app/services/add-food-data.service';
 import { SharedDataService } from 'src/app/services/shared-data.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -8,7 +10,10 @@ import { SharedDataService } from 'src/app/services/shared-data.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  constructor(private shareData: SharedDataService, private userData: AddFoodDataService) {}
+  constructor(
+    private shareData: SharedDataService, 
+    private userData: AddFoodDataService,
+    private datePipe: DatePipe) {}
   
   userDetails: any
   showName: boolean = false
@@ -21,7 +26,7 @@ export class ProfileComponent {
   currentWeight = 0;
   currentBMR = '';
   existingProfile: any;
-  lastUpdated = new Date
+  lastUpdated: any;
   profile = {
     name: '',
     email: '',
@@ -44,12 +49,12 @@ export class ProfileComponent {
     //console.log(this.userDetails.userEmail)
     this.userData.loadProfile(this.userDetails.userEmail).subscribe(val=>{
       this.existingProfile = val[0]
-      this.profileExists = true
-      this.currentWeight = this.existingProfile.weight;
-      this.currentBMR = this.existingProfile.bmr.toFixed(0);
-      this.lastUpdated = this.existingProfile.date.toISOString().split('T')[0];
       if(this.existingProfile){
         this.profileExists = true;
+        this.currentWeight = this.existingProfile.weight;
+        this.currentBMR = this.existingProfile.bmr.toFixed(0);
+        let latestDate= this.existingProfile.date.seconds*1000;
+        this.lastUpdated = this.datePipe.transform(latestDate,'dd/MM/yy')
       }
     })
   }
