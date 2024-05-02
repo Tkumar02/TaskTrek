@@ -1,40 +1,74 @@
 <div class="main-container p-5">
-    <h2 class="text-center mb-5">Today's Suggested Food Plan</h2>
+    <div class="food-container">
+        <h2 class="text-center mb-5">Today's Suggested Food Plan</h2>
 
-    <div class="d-flex justify-content-center breakfast gap-5">
-        <div class="d-flex flex-column align-items-center breakfast">
-            <h3>Breakfast</h3>
-            <h4 class="breakfastFood">{{todayPlan.breakfastFood}}</h4>
+        <div class="d-flex justify-content-center breakfast gap-5">
+            <div class="d-flex flex-column align-items-center breakfast">
+                <h3>Breakfast</h3>
+                <h4 class="breakfastFood">{{todayPlan.breakfastFood}}</h4>
+            </div>
+            <div>
+                <h3>KCal</h3>
+                <h4>{{todayPlan.breakfastKcal}}</h4>
+            </div>
         </div>
-        <div>
-            <h3>KCal</h3>
-            <h4>{{todayPlan.breakfastKcal}}</h4>
+
+        <div class="d-flex justify-content-center lunch gap-5 mt-3">
+            <div class="d-flex flex-column align-items-center lunch">
+                <h3>Lunch</h3>
+                <h4 class="lunchFood text-center">{{todayPlan.lunchFood}}</h4>
+            </div>
+            <div>
+                <h3>KCal</h3>
+                <h4>{{todayPlan.lunchKcal}}</h4>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center dinner gap-5 mt-3">
+            <div class="d-flex flex-column align-items-center dinner">
+                <h3>Dinner</h3>
+                <h4 class="dinnerFood">{{todayPlan.dinnerFood}}</h4>
+            </div>
+            <div>
+                <h3>KCal</h3>
+                <h4>{{todayPlan.dinnerKcal}}</h4>
+            </div>
+        </div>
+        <div class="d-flex mt-3 justify-content-center align-items-center gap-5">
+            <button>Complete</button>
+            <button>Edit</button>
         </div>
     </div>
 
-    <div class="d-flex justify-content-center lunch gap-5 mt-3">
-        <div class="d-flex flex-column align-items-center lunch">
-            <h3>Lunch</h3>
-            <h4 class="lunchFood text-center">{{todayPlan.lunchFood}}</h4>
-        </div>
-        <div>
-            <h3>KCal</h3>
-            <h4>{{todayPlan.lunchKcal}}</h4>
-        </div>
-    </div>
+    <div class="exercise-container mt-5">
+        <h2 class="text-center mb-5">Today's Suggested Exercise Plan</h2>
 
-    <div class="d-flex justify-content-center dinner gap-5 mt-3">
-        <div class="d-flex flex-column align-items-center dinner">
-            <h3>Dinner</h3>
-            <h4 class="dinnerFood">{{todayPlan.dinnerFood}}</h4>
+        <div class="d-flex justify-content-center breakfast gap-5">
+            <div class="d-flex flex-column align-items-center breakfast">
+                <h3>Cardio</h3>
+                <h4 class="breakfastFood">plceholder</h4>
+            </div>
+            <div>
+                <h3>KCal</h3>
+                <h4>number placeholder</h4>
+            </div>
         </div>
-        <div>
-            <h3>KCal</h3>
-            <h4>{{todayPlan.dinnerKcal}}</h4>
+
+        <div class="d-flex justify-content-center lunch gap-5 mt-3">
+            <div class="d-flex flex-column align-items-center lunch">
+                <h3>Resistance</h3>
+                <h4 class="lunchFood text-center">placeholder</h4>
+            </div>
+            <div>
+                <h3>KCal</h3>
+                <h4>number placeholder</h4>
+            </div>
         </div>
-    </div>
-    <div class="d-flex mt-3 justify-content-center align-items-center gap-5">
-        <button>Complete</button>
-        <button>Edit</button>
+
+        
+        <div class="d-flex mt-3 justify-content-center align-items-center gap-5">
+            <button>Complete</button>
+            <button>Edit</button>
+        </div>
     </div>
 </div>
