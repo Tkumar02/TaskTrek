@@ -1,0 +1,10 @@
+.foodDesc{
+    height: 10vh;
+}
+
+.kcalBox{
+    width: 100px;
+    background-color: aliceblue;
+    text-align: center;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,43 @@
+<div class="main-body d-flex flex-column align-items-center">
+    <h2 class="main-title text-center">Edit Plan</h2>
+    <h6>{{ this.today | date:'dd-MM-yyyy' }}</h6>
+    <p *ngIf="!this.foodTime">Please go <a routerLink="/plan-today">back</a> and select a meal time to update</p>
+    <button *ngIf="this.foodTime=='breakfast'" id="breakfast" (click)="showBox($event)">Edit Breakfast</button>
+    <form
+    *ngIf="breakfastBox"
+    [formGroup]="bForm"
+    class="d-flex flex-column align-items-center"
+    (submit)="submitEntry(foodTime)">
+        <label for="bFood">Update Food</label>
+        <textarea id="b-food" formControlName="bFood" type="text"></textarea>
+        <label for="bKcal">Update kcal</label>
+        <input id="b-kcal" formControlName="bKcal" type="number">
+        <button [disabled]="!bFood ||bFood.invalid || bFood.pristine || !bKcal || bKcal.invalid || bKcal.pristine" type="submit" class="mb-5">Submit</button>
+    </form>
+
+    <button *ngIf="this.foodTime=='lunch'" id="lunch" (click)="showBox($event)">Edit Lunch</button>
+    <form
+    *ngIf="lunchBox"
+    [formGroup]="lForm"
+    class="d-flex flex-column align-items-center"
+    (submit)="submitEntry(foodTime)">
+        <label for="food">Update Food</label>
+        <textarea id="l-food" formControlName="lFood" type="text"></textarea>
+        <label for="kcal">Update kcal</label>
+        <input id="l-kcal" formControlName="lKcal" type="number">
+        <button [disabled]="lForm.invalid" type="submit" class="mb-5">Submit</button>
+    </form>
+
+    <button *ngIf="this.foodTime=='dinner'" id="dinner" (click)="showBox($event)">Edit Dinner</button>
+    <form
+    *ngIf="dinnerBox"
+    [formGroup]="dForm"
+    class="d-flex flex-column align-items-center"
+    (submit)="submitEntry(foodTime)">
+        <label for="food">Update Food</label>
+        <textarea id="d-food" formControlName="dFood" type="text"></textarea>
+        <label for="kcal">Update kcal</label>
+        <input id="d-kcal" formControlName="dKcal" type="number">
+        <button [disabled]="dForm.invalid" type="submit" class="mb-5">Submit</button>
+    </form>
+</div>

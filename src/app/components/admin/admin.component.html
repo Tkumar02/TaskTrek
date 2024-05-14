@@ -3,35 +3,45 @@
 <div>
     <div class="d-flex flex-column align-items-center">
         <h3>Select User</h3>
-        <select [(ngModel)]="member" name="user">
+        <select (change)="checkComplete()" [(ngModel)]="member" name="user">
             <option *ngFor="let user of users" 
             [value]="user.userEmail"
             >{{user.firstName}} - {{user.userEmail}}</option>
         </select>
     </div>
-    <div>
-        <label class="me-2" for="foodDate">Date: </label>
-        <input type="date" name="foodDate" [(ngModel)]="formData.foodDate">
+    <div class="mainBody d-flex flex-column align-items-center mt-2 mb-5">
+        <div>
+            <label class="me-2" for="foodDate">Date: </label>
+            <input (change)="checkComplete()" type="date" name="foodDate" [(ngModel)]="formData.foodDate">
+        </div>
+        <div class="foodBody mt-2">
+            <div class="d-flex flex-column align-items-center mt-3">
+                <label for="breakfast">Breakfast: </label>
+                <textarea class="foodDesc" (keyup)="checkComplete()" type="text" name="breakfast" [(ngModel)]="formData.breakfastFood"></textarea>
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="breakfast_kcal">Kcal: </label>
+                <input class="kcalBox" (keyup)="checkComplete()" type="number" [(ngModel)]="formData.breakfastKcal" name="breakfast_kcal">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="lunch">Lunch: </label>
+                <input class="foodDesc" (keyup)="checkComplete()" type="text" name="lunch" [(ngModel)]="formData.lunchFood">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="lunch_kcal">Kcal: </label>
+                <input class="kcalBox" (keyup)="checkComplete()" [(ngModel)]="formData.lunchKcal" type="number" name="lunch_kcal">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="dinner">Dinner: </label>
+                <input class="foodDesc" (keyup)="checkComplete()" type="text" name="dinner" [(ngModel)]="formData.dinnerFood">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="dinner_kcal">Kcal: </label>
+                <input class="kcalBox" (keyup)="checkComplete()"  type="number" [(ngModel)]="formData.dinnerKcal" name="dinner_kcal">
+            </div>
+        </div>
+        <button class="mt-2" [disabled]="hideButton" (click)="showBreakfast()">Submit</button>
     </div>
-    <div>
-        <label class="me-2" for="breakfast">Breakfast: </label>
-        <input type="text" name="breakfast" [(ngModel)]="formData.breakfastFood">
-        <label class="ms-3 me-2" for="breakfast_kcal">Breakfast Kcal: </label>
-        <input type="number" [(ngModel)]="formData.breakfastKcal" name="breakfast_kcal">
-    </div>
-    <div>
-        <label class="me-4" for="lunch">Lunch: </label>
-        <input class="ms-1" type="text" name="lunch" [(ngModel)]="formData.lunchFood">
-        <label class="ms-4 me-2" for="lunch_kcal">Lunch Kcal: </label>
-        <input class="ms-3" [(ngModel)]="formData.lunchKcal" type="number" name="lunch_kcal">
-    </div>
-    <div>
-        <label class="me-4" for="dinner">Dinner: </label>
-        <input class="ms-1" type="text" name="dinner" [(ngModel)]="formData.dinnerFood">
-        <label class="ms-4 me-2" for="dinner_kcal">Dinner Kcal: </label>
-        <input class="ms-3" type="number" [(ngModel)]="formData.dinnerKcal" name="dinner_kcal">
-    </div>
-    <button (click)="showBreakfast()">Submit</button>
 </div>
 </form>
 

@@ -2,6 +2,8 @@ import { DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +19,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { AdminComponent } from './components/admin/admin.component';
 import { CalendarComponent } from './components/fitness/calendar/calendar.component';
+import { EditPlanComponent } from './components/fitness/edit-plan/edit-plan.component';
 import { PlanTodayComponent } from './components/fitness/plan-today/plan-today.component';
 import { ProfileComponent } from './components/fitness/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
@@ -36,6 +39,7 @@ import { SignupComponent } from './components/signup/signup.component';
     CalendarComponent,
     PlanTodayComponent,
     AdminComponent,
+    EditPlanComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import { SignupComponent } from './components/signup/signup.component';
     // provideDatabase(() => getDatabase()),
     // provideStorage(() => getStorage()),
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

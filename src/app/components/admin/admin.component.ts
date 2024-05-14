@@ -28,6 +28,7 @@ export class AdminComponent {
   public hide = true;
   public users: any;
   public member: any;
+  public hideButton = true;
 
   ngOnInit(): void{
     this.afAuth.authState.subscribe(user=>{
@@ -55,7 +56,22 @@ export class AdminComponent {
         this.formData.lunchKcal = 0;
         this.formData.dinnerKcal = 0;
       }
+      this.checkComplete()
     })
+  }
+
+  checkComplete(){
+    if(this.formData.breakfastFood && 
+      this.formData.breakfastKcal && 
+      this.member &&
+      this.formData.lunchFood && 
+      this.formData.lunchKcal &&
+      this.formData.dinnerFood && 
+      this.formData.dinnerKcal &&
+      this.formData.foodDate
+    ){
+      this.hideButton=false
+    }
   }
 
 }

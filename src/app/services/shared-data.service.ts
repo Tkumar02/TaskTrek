@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class SharedDataService {
 
   private userDetails: any;
+  private foodTime: any;
 
   setUserDetails(data:any){
     this.userDetails = data;
@@ -13,5 +14,13 @@ export class SharedDataService {
 
   getUserDetails(){
     return this.userDetails
+  }
+
+  setFoodTime(data:any){
+    this.foodTime = data
+  }
+
+  getFoodTime(){
+    return this.foodTime
   }
 }
