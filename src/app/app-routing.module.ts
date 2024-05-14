@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
+import { CalendarComponent } from './components/fitness/calendar/calendar.component';
 import { EditPlanComponent } from './components/fitness/edit-plan/edit-plan.component';
 import { FitnessHomeComponent } from './components/fitness/fitness-home/fitness-home.component';
 import { PlanTodayComponent } from './components/fitness/plan-today/plan-today.component';
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: 'admin', component:AdminComponent},
   {path: 'profile', component: ProfileComponent},
   {path:'plan-today', component:PlanTodayComponent},
-  {path:'edit-plan', component:EditPlanComponent}
+  {path:'edit-plan', component:EditPlanComponent},
+  {path: 'calendar', component: CalendarComponent}
 ];
 
 @NgModule({

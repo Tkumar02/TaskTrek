@@ -40,4 +40,30 @@
         <input id="d-kcal" formControlName="dKcal" type="number">
         <button [disabled]="dForm.invalid" type="submit" class="mb-5">Submit</button>
     </form>
+
+    <button *ngIf="this.foodTime=='cardio'" id="cardio" (click)="showBox($event)">Edit Cardio</button>
+    <form
+    *ngIf="cardioBox"
+    [formGroup]="cardioForm"
+    class="d-flex flex-column align-items-center"
+    (submit)="submitEntry(foodTime)">
+        <label for="cardio">Update Exercise</label>
+        <textarea id="cardioEx" formControlName="cardio" type="text"></textarea>
+        <label for="kcal">Update kcal</label>
+        <input id="cardio-kcal" formControlName="cardioKcal" type="number">
+        <button [disabled]="cardioForm.invalid" type="submit" class="mb-5">Submit</button>
+    </form>
+
+    <button *ngIf="this.foodTime=='resistance'" id="resistance" (click)="showBox($event)">Edit Resistance</button>
+    <form
+    *ngIf="resBox"
+    [formGroup]="resForm"
+    class="d-flex flex-column align-items-center"
+    (submit)="submitEntry(foodTime)">
+        <label for="resistanceEx">Update Exercise</label>
+        <textarea id="resistance" formControlName="resistance" type="text"></textarea>
+        <label for="kcal">Update kcal</label>
+        <input id="res-kcal" formControlName="resKcal" type="number">
+        <button [disabled]="resForm.invalid" type="submit" class="mb-5">Submit</button>
+    </form>
 </div>

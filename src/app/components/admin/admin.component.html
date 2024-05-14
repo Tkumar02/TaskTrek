@@ -39,6 +39,22 @@
                 <label for="dinner_kcal">Kcal: </label>
                 <input class="kcalBox" (keyup)="checkComplete()"  type="number" [(ngModel)]="formData.dinnerKcal" name="dinner_kcal">
             </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="dinner">Cardio: </label>
+                <input class="foodDesc" (keyup)="checkComplete()" type="text" name="cardio" [(ngModel)]="formData.cardio">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="cardio_kcal">Kcal: </label>
+                <input class="kcalBox" (keyup)="checkComplete()"  type="number" [(ngModel)]="formData.cardioKcal" name="cardio_kcal">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="dinner">Resistance: </label>
+                <input class="foodDesc" (keyup)="checkComplete()" type="text" name="resistance" [(ngModel)]="formData.resistance">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="resistance_kcal">Kcal: </label>
+                <input class="kcalBox" (keyup)="checkComplete()"  type="number" [(ngModel)]="formData.resistanceKcal" name="resistance_kcal">
+            </div>
         </div>
         <button class="mt-2" [disabled]="hideButton" (click)="showBreakfast()">Submit</button>
     </div>

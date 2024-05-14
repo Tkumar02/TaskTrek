@@ -1,8 +1,8 @@
-export interface completeFoodForm {
-    food: string;
+export interface completeExerciseForm {
+    type: string;
+    exercise: string;
     kcal: number;
     date: Date;
-    mealTime: string;
     method: string;
     user: string;
     userEmail: string;

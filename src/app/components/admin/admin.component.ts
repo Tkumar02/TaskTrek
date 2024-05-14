@@ -22,6 +22,10 @@ export class AdminComponent {
     breakfastKcal: 0,
     lunchKcal: 0,
     dinnerKcal: 0,
+    cardio:'',
+    cardioKcal: 0,
+    resistance: '',
+    resistanceKcal: 0,
     submittedBy: '',
     memberEmail:''
   }
@@ -61,12 +65,12 @@ export class AdminComponent {
   }
 
   checkComplete(){
-    if(this.formData.breakfastFood && 
-      this.formData.breakfastKcal && 
+    if(this.formData.breakfastFood &&
+      this.formData.breakfastKcal &&
       this.member &&
-      this.formData.lunchFood && 
+      this.formData.lunchFood &&
       this.formData.lunchKcal &&
-      this.formData.dinnerFood && 
+      this.formData.dinnerFood &&
       this.formData.dinnerKcal &&
       this.formData.foodDate
     ){
