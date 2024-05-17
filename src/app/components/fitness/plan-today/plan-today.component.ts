@@ -22,8 +22,11 @@ export class PlanTodayComponent {
     private cp: ConfirmPlanService,
     private route: Router,
     private cdr: ChangeDetectorRef
-  ){  }
+  ){ 
+    this.plans = [];
+   }
 
+  plans: any[];
   currentUserEmail = '';
   todayDate = '';
   errorLoading: boolean = false;
@@ -66,7 +69,6 @@ export class PlanTodayComponent {
   }
 
   ngOnInit(): void {
-    console.log(this.todayDate, 'on init')
 
     this.afAuth.authState.subscribe(user=>{
       if(user && user.email){
@@ -79,6 +81,15 @@ export class PlanTodayComponent {
       }
       this.todayDate = this.today.toISOString().split('T')[0], this.today
 
+      this.foodService.loadAllPlans(this.currentUserEmail).subscribe((val:any)=>{
+        const allPlans = val;
+        console.log(allPlans)
+        for(let i=0;i<allPlans.length;i++){
+          this.plans.push(allPlans[i].foodDate)
+        }
+        console.log(this.plans)
+      })
+
       this.loadPlan()
     })
   }
@@ -88,7 +99,7 @@ export class PlanTodayComponent {
     .subscribe(val=>{
       this.todayPlan = val[0]
       this.planDate = this.todayPlan.foodDate;
-      console.log(this.planDate)
+      //console.log(this.planDate)
       this.bf = this.todayPlan.breakfastFood
       this.bfKcal = this.todayPlan.breakfastKcal
       this.lunch = this.todayPlan.lunchFood
@@ -102,7 +113,7 @@ export class PlanTodayComponent {
       this.resistance = this.todayPlan.resistance
       this.resistanceKcal = this.todayPlan.resistanceKcal
     })
-    console.log(this.errorLoading, this.planDate, this.todayDate)
+    //console.log(this.errorLoading, this.planDate, this.todayDate)
     
   }
 
@@ -177,16 +188,22 @@ export class PlanTodayComponent {
     const month = (date.getMonth()+1).toString().padStart(2,'0');
     const day = date.getDate().toString().padStart(2,'0')
     this.todayDate = `${year}-${month}-${day}`
-    const currentDate = new Date(this.planDate)
+    //const currentDate = new Date(this.planDate)
     this.loadPlan()
-    console.log('back', currentDate,date)
-    if((currentDate.getTime()-date.getTime())!==86400000){
-      this.errorLoading = true;
-    }
-    else{
-      console.log('works')
+    if(this.plans.includes(this.todayDate)){
       this.errorLoading = false;
     }
+    else{
+      this.errorLoading = true;
+    }
+    //console.log('back', currentDate,date)
+    // if((currentDate.getTime()-date.getTime())!==86400000){
+    //   this.errorLoading = true;
+    // }
+    // else{
+    //   //console.log('works')
+    //   this.errorLoading = false;
+    // }
   }
 
   goForward(today:string){
@@ -197,14 +214,20 @@ export class PlanTodayComponent {
     const day = date.getDate().toString().padStart(2,'0')
     this.todayDate = `${year}-${month}-${day}`
     this.loadPlan()
-    const currentDate = new Date(this.planDate)
-    console.log('forward', date,currentDate)
-    if((date.getTime()-currentDate.getTime())!==86400000){
-      this.errorLoading = true;
-    }
-    else{
-      console.log('works')
+    if(this.plans.includes(this.todayDate)){
       this.errorLoading = false;
     }
+    else{
+      this.errorLoading = true;
+    }
+    //const currentDate = new Date(this.planDate)
+    //console.log('forward', date,currentDate)
+    // if((date.getTime()-currentDate.getTime())!==86400000){
+    //   this.errorLoading = true;
+    // }
+    // else{
+    //   //console.log('works')
+    //   this.errorLoading = false;
+    // }
   }
 }

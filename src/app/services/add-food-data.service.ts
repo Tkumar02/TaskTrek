@@ -24,4 +24,8 @@ export class AddFoodDataService {
     return this.afs.collection('Plans',ref=>ref.where('foodDate','==',date).where('memberEmail','==',email)).valueChanges()
   }
 
+  loadAllPlans(user:string){
+    return this.afs.collection('Plans', ref=>ref.where('memberEmail','==',user)).valueChanges()
+  }
+
 }

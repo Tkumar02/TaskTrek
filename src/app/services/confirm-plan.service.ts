@@ -50,8 +50,6 @@ export class ConfirmPlanService {
   loadLatestExercisePlan(email:any, exercise:string, date:string){
     return this.afs.collection('Confirmed-Exercise',ref=>ref.where('userEmail','==',email).where('ISOdate','==',date).where('type','==',exercise).orderBy('date','desc').limit(1)).valueChanges()
   }
- 
-
 
   //not used this yet (updatePlan) - but to think about when this should be used
   updatePlan(email:string, date:string, data: any){
