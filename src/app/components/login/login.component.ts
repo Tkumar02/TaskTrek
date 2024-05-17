@@ -42,6 +42,9 @@ export class LoginComponent {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log('ERROR TA')
+      alert('There was an error, please try again')
+      this.email = ''
+      this.pw = ''
     });
   }
 }

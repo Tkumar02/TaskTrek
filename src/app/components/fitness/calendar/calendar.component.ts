@@ -15,11 +15,13 @@ export class CalendarComponent {
   lastBreakfast: any;
   lastLunch: any;
   lastDinner: any;
+  lastSnacks: any;
   resistance: any;
   cardio: any;
   userEmail: string = '';
   userDetails: any;
   userProfile: any;
+  showPlan: boolean = false;
 
   constructor(
     private cps: ConfirmPlanService,
@@ -41,7 +43,6 @@ export class CalendarComponent {
   }
 
   getDetails(){
-    console.log(this.selectedDate, typeof(this.selectedDate),'calendar')
     this.cps.loadLatestFoodPlan(this.userEmail, 'breakfast',this.selectedDate).subscribe(val=>{
       this.lastBreakfast = val[0]
     })
@@ -49,6 +50,9 @@ export class CalendarComponent {
       this.lastLunch = val[0]
     })
     this.cps.loadLatestFoodPlan(this.userEmail, 'dinner',this.selectedDate).subscribe(val=>{
+      this.lastDinner = val[0]
+    })
+    this.cps.loadLatestFoodPlan(this.userEmail, 'snacks',this.selectedDate).subscribe(val=>{
       this.lastDinner = val[0]
     })
     this.cps.loadLatestExercisePlan(this.userEmail,'resistance',this.selectedDate).subscribe(val=>{
@@ -59,7 +63,8 @@ export class CalendarComponent {
     })
     this.userService.loadProfile(this.userEmail).subscribe(val=>{
       this.userProfile = val[0]
-      console.log(this.userProfile)
+      //console.log(this.userProfile)
+      this.showPlan = true;
     })
   }
 }

@@ -9,7 +9,7 @@ export class AddFoodDataService {
   constructor(private afs:AngularFirestore) { }
 
   addFood(data:any){
-    return this.afs.collection('Food_Plans').add(data)
+    return this.afs.collection('Plans').add(data)
   }
 
   addProfile(data:any){
@@ -21,7 +21,7 @@ export class AddFoodDataService {
   }
 
   loadPlan(date:any,email:any){
-    return this.afs.collection('Food_Plans',ref=>ref.where('foodDate','==',date).where('memberEmail','==',email)).valueChanges()
+    return this.afs.collection('Plans',ref=>ref.where('foodDate','==',date).where('memberEmail','==',email)).valueChanges()
   }
 
 }

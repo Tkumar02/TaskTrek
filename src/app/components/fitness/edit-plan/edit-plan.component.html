@@ -41,6 +41,19 @@
         <button [disabled]="dForm.invalid" type="submit" class="mb-5">Submit</button>
     </form>
 
+    <button *ngIf="this.foodTime=='snacks'" id="snacks" (click)="showBox($event)">Edit Snacks</button>
+    <form
+    *ngIf="snacksBox"
+    [formGroup]="sForm"
+    class="d-flex flex-column align-items-center"
+    (submit)="submitEntry(foodTime)">
+        <label for="food">Update Food</label>
+        <textarea id="s-food" formControlName="sFood" type="text"></textarea>
+        <label for="kcal">Update kcal</label>
+        <input id="s-kcal" formControlName="sKcal" type="number">
+        <button [disabled]="dForm.invalid" type="submit" class="mb-5">Submit</button>
+    </form>
+
     <button *ngIf="this.foodTime=='cardio'" id="cardio" (click)="showBox($event)">Edit Cardio</button>
     <form
     *ngIf="cardioBox"

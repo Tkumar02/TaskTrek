@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 import { completeExerciseForm } from 'src/app/interfaces/completeExercise';
 import { completeFoodForm } from 'src/app/interfaces/completeFood';
 import { AddFoodDataService } from 'src/app/services/add-food-data.service';
@@ -18,11 +19,15 @@ export class PlanTodayComponent {
     private afAuth:AngularFireAuth,
     private foodService: AddFoodDataService,
     private sds: SharedDataService,
-    private cp: ConfirmPlanService
-  ){}
+    private cp: ConfirmPlanService,
+    private route: Router,
+    private cdr: ChangeDetectorRef
+  ){  }
 
   currentUserEmail = '';
-  todayDate = ''
+  todayDate = '';
+  errorLoading: boolean = false;
+  today =  new Date();
   todayPlan: any;
   bf: any;
   bfKcal: any;
@@ -30,10 +35,13 @@ export class PlanTodayComponent {
   lunchKcal: any;
   dinner: any;
   dinnerKcal: any;
+  snacks: any;
+  snacksKcal: any;
   cardio: string = '';
   cardioKcal: number = 0;
   resistance: string = '';
   resistanceKcal: number = 0;
+  planDate = ''
 
   completeForm: completeFoodForm = {
     food: '',
@@ -58,6 +66,7 @@ export class PlanTodayComponent {
   }
 
   ngOnInit(): void {
+    console.log(this.todayDate, 'on init')
 
     this.afAuth.authState.subscribe(user=>{
       if(user && user.email){
@@ -68,24 +77,35 @@ export class PlanTodayComponent {
         this.completeExercise.user = userDetails.userName
         this.completeExercise.userEmail = userDetails.userEmail
       }
-      this.todayDate = new Date().toISOString().split('T')[0], new Date()
-      console.log(this.todayDate, typeof(this.todayDate,'TA LOOK HERE'))
-      this.foodService.loadPlan(this.todayDate, this.currentUserEmail).subscribe(val=>{
-        this.todayPlan = val[0]
-        this.bf = this.todayPlan.breakfastFood
-        this.bfKcal = this.todayPlan.breakfastKcal
-        this.lunch = this.todayPlan.lunchFood
-        this.lunchKcal = this.todayPlan.lunchKcal
-        this.dinner = this.todayPlan.dinnerFood
-        this.dinnerKcal = this.todayPlan.dinnerKcal
-        this.cardio = this.todayPlan.cardio
-        this.cardioKcal = this.todayPlan.cardioKcal
-        this.resistance = this.todayPlan.resistance
-        this.resistanceKcal = this.todayPlan.resistanceKcal
-      })
-    })
+      this.todayDate = this.today.toISOString().split('T')[0], this.today
 
+      this.loadPlan()
+    })
   }
+
+  loadPlan(){
+    this.foodService.loadPlan(this.todayDate, this.currentUserEmail)
+    .subscribe(val=>{
+      this.todayPlan = val[0]
+      this.planDate = this.todayPlan.foodDate;
+      console.log(this.planDate)
+      this.bf = this.todayPlan.breakfastFood
+      this.bfKcal = this.todayPlan.breakfastKcal
+      this.lunch = this.todayPlan.lunchFood
+      this.lunchKcal = this.todayPlan.lunchKcal
+      this.dinner = this.todayPlan.dinnerFood
+      this.dinnerKcal = this.todayPlan.dinnerKcal
+      this.snacks = this.todayPlan.snacks
+      this.snacksKcal = this.todayPlan.snacksKcal
+      this.cardio = this.todayPlan.cardio
+      this.cardioKcal = this.todayPlan.cardioKcal
+      this.resistance = this.todayPlan.resistance
+      this.resistanceKcal = this.todayPlan.resistanceKcal
+    })
+    console.log(this.errorLoading, this.planDate, this.todayDate)
+    
+  }
+
 
   sendID(foodTime: string){
     switch(foodTime){
@@ -98,6 +118,9 @@ export class PlanTodayComponent {
       case 'dinner':
         this.sds.setFoodTime('dinner')
         break;
+      case 'snacks':
+         this.sds.setFoodTime('snacks')
+         break;
       case 'resistance':
         this.sds.setFoodTime('resistance')
         break;
@@ -118,32 +141,70 @@ export class PlanTodayComponent {
         this.completeForm.food = this.lunch
         this.completeForm.kcal = this.lunchKcal
         this.completeForm.mealTime = 'lunch'
-        console.log(this.completeForm)
         this.cp.confirmFood(this.completeForm)
         break;
       case 'dinner':
         this.completeForm.food = this.dinner
         this.completeForm.kcal = this.dinnerKcal
         this.completeForm.mealTime = 'dinner'
-        console.log(this.completeForm)
         this.cp.confirmFood(this.completeForm)
         break;
+      case 'snacks':
+         this.completeForm.food = this.snacks
+         this.completeForm.kcal = this.snacksKcal
+         this.completeForm.mealTime = 'snacks'
+         this.cp.confirmFood(this.completeForm)
+         break;
       case 'cardio':
-        console.log('hi')
         this.completeExercise.exercise = this.cardio
         this.completeExercise.kcal = this.cardioKcal
         this.completeExercise.type = 'cardio'
-        console.log(this.completeExercise)
         this.cp.confirmExercise(this.completeExercise)
         break;
       case 'resistance':
         this.completeExercise.exercise = this.resistance
         this.completeExercise.kcal = this.resistanceKcal
         this.completeExercise.type = 'resistance'
-        console.log(this.completeExercise)
         this.cp.confirmExercise(this.completeExercise)
         break;
     }
   }
 
+  goBack(today:string){
+    const date = new Date(today)
+    date.setTime(date.getTime() - 86400000)
+    const year = date.getFullYear();
+    const month = (date.getMonth()+1).toString().padStart(2,'0');
+    const day = date.getDate().toString().padStart(2,'0')
+    this.todayDate = `${year}-${month}-${day}`
+    const currentDate = new Date(this.planDate)
+    this.loadPlan()
+    console.log('back', currentDate,date)
+    if((currentDate.getTime()-date.getTime())!==86400000){
+      this.errorLoading = true;
+    }
+    else{
+      console.log('works')
+      this.errorLoading = false;
+    }
+  }
+
+  goForward(today:string){
+    const date = new Date(today)
+    date.setTime(date.getTime() + 86400000)
+    const year = date.getFullYear();
+    const month = (date.getMonth()+1).toString().padStart(2,'0');
+    const day = date.getDate().toString().padStart(2,'0')
+    this.todayDate = `${year}-${month}-${day}`
+    this.loadPlan()
+    const currentDate = new Date(this.planDate)
+    console.log('forward', date,currentDate)
+    if((date.getTime()-currentDate.getTime())!==86400000){
+      this.errorLoading = true;
+    }
+    else{
+      console.log('works')
+      this.errorLoading = false;
+    }
+  }
 }

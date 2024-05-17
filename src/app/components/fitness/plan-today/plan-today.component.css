@@ -1,5 +1,5 @@
 .main-container{
-    color: aqua;
+    color: rgb(108, 35, 71);
     min-height: 100vh;
     background-color: black;
     width: 100vw;
@@ -9,24 +9,28 @@
     color: goldenrod;
 }
 
-.breakFastFood{
-    font-style: italic;
-}
-
 .lunch{
     color: rgb(125, 192, 125);
 }
 
-.lunchFood{
-    font-style: italic;
-}
-
 .dinner{
-    color: rgb(122, 49, 49);
+    color: rgb(103, 80, 156);
 }
 
-.dinnerFood{
+.snacks{
+    color: blue;
+}
+
+.content{
     font-style: italic;
+}
+
+.cardio{
+    color:red;
+}
+
+.resistance{
+    color: rgb(219, 153, 129);
 }
 
 button{
@@ -34,4 +38,24 @@ button{
     border: solid black;
     background-color: darkslategrey;
     color: white;
+}
+
+.titleBox{
+    display: flex;
+    justify-content: space-around;
+    background-color: black;
+    color: aliceblue;
+}
+
+
+
+.arrow{
+    font-size: 2rem;
+    color:rgb(219, 153, 129);
+    position: relative;
+    top: 10px;
+    background-color: black;
+    height: 1rem;
+    border-radius: 0;
+    cursor: pointer;
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ToastrService } from 'ngx-toastr';
-import { map, take } from 'rxjs';
+import { map, take, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ConfirmPlanService {
 
   confirmFood(data:any){
     return this.afs.collection('Confirmed-Food').add(data).then(()=>{
-      this.toastr.success('Submitted successfully')
+      //this.toastr.success('Submitted successfully')
       alert('Successfully Submitted')
     }).catch(error => {
       alert('Error: please try again')
@@ -24,7 +25,7 @@ export class ConfirmPlanService {
 
   confirmExercise(data:any){
     return this.afs.collection('Confirmed-Exercise').add(data).then(()=>{
-      this.toastr.success('Submitted successfully')
+      //this.toastr.success('Submitted successfully')
       alert('Successfully Submitted')
     }).catch(error => {
       alert('Error: please try again')
@@ -32,7 +33,18 @@ export class ConfirmPlanService {
   }
 
   loadLatestFoodPlan(email:any, mealTime:string, date:string){
-    return this.afs.collection('Confirmed-Food',ref=>ref.where('userEmail','==',email).where('ISOdate','==',date).where('mealTime','==',mealTime).orderBy('date','desc').limit(1)).valueChanges()
+    return this.afs.collection('Confirmed-Food',ref=>
+      ref.where('userEmail','==',email)
+        .where('ISOdate','==',date)
+        .where('mealTime','==',mealTime)
+        .orderBy('date','desc')
+        .limit(1)
+      ).valueChanges().pipe(
+        catchError(error=>{
+          console.error('nope', error);
+          return throwError(()=>'Error')
+        })
+      )
   }
 
   loadLatestExercisePlan(email:any, exercise:string, date:string){

@@ -22,6 +22,7 @@ export class EditPlanComponent {
   breakfastBox: boolean = false;
   lunchBox: boolean = false;
   dinnerBox: boolean = false;
+  snacksBox: boolean = false;
   resBox: boolean = false;
   cardioBox: boolean = false;
   hideBfButton: boolean = true;
@@ -73,6 +74,12 @@ export class EditPlanComponent {
     dDate: new FormControl(this.today)
   })
 
+  sForm = new FormGroup({
+    sFood: new FormControl('', [Validators.required]),
+    sKcal: new FormControl('',[Validators.required]),
+    sDate: new FormControl(this.today)
+  })
+
   cardioForm = new FormGroup({
     cardio: new FormControl('', [Validators.required]),
     cardioKcal: new FormControl('',[Validators.required]),
@@ -106,6 +113,9 @@ export class EditPlanComponent {
         break;
       case 'dinner':
         this.dinnerBox = !this.dinnerBox
+        break;
+      case 'snacks':
+        this.snacksBox = !this.snacksBox
         break;
       case 'resistance':
         this.resBox = !this.resBox
@@ -184,18 +194,26 @@ export class EditPlanComponent {
         this.submitFood.mealTime = 'dinner'
         this.cps.confirmFood(this.submitFood)
         break;
+      case 'snacks':
+        this.foodValue = this.sForm.get('sFood')
+        this.kcalValue = this.sForm.get('sKcal')
+        this.submitFood.food = this.foodValue.value
+        this.submitFood.kcal = this.kcalValue.value
+        this.submitFood.mealTime = 'snacks'
+        this.cps.confirmFood(this.submitFood)
+        break;
       case 'cardio':
         this.foodValue = this.cardioForm.get('cardio')
         this.kcalValue = this.cardioForm.get('cardioKcal')
-        this.submitExercise.type = 'Cardio'
+        this.submitExercise.type = 'cardio'
         this.submitExercise.kcal = this.kcalValue.value
         this.submitExercise.exercise = this.foodValue.value
         this.cps.confirmExercise(this.submitExercise)
         break;
       case 'resistance':
-        this.foodValue = this.dForm.get('dFood')
-        this.kcalValue = this.dForm.get('dKcal')
-        this.submitExercise.type = 'Resistance'
+        this.foodValue = this.resForm.get('resistance')
+        this.kcalValue = this.resForm.get('resKcal')
+        this.submitExercise.type = 'resistance'
         this.submitExercise.kcal = this.kcalValue.value
         this.submitExercise.exercise = this.foodValue.value
         this.cps.confirmExercise(this.submitExercise)

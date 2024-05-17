@@ -55,6 +55,7 @@ export class NavComponent {
       .then(()=>{
         alert('You have successfully signed out!')
         this.disableSignOut = true;
+        this.disableLoginSignup = false;
         this.userName = ''
         this.userInfo = ''
         this.userEmail = ''

@@ -1,11 +1,21 @@
-<div class="main-container p-5">
+<div class="titleBox">
+    <button (click)="goBack(todayDate)" class="arrow">&larr;</button>
+    <div class="title d-flex flex-column align-items-center">
+        <h2 class="text-center mb-2">Today's Plan</h2>
+        <h3 class="text-center mb-2">{{todayDate}}</h3>
+    </div>
+    <button (click)="goForward(todayDate)" class="arrow">&rarr;</button>
+</div>
+
+<div *ngIf="!errorLoading" class="main-container p-5">
     <div class="food-container">
-        <h2 class="text-center mb-5">Today's Suggested Plan</h2>
+        
+        
 
         <div class="d-flex justify-content-center breakfast gap-5">
             <div class="d-flex flex-column align-items-center breakfast">
                 <h3>Breakfast</h3>
-                <h4 class="breakFastFood">{{bf}}</h4>
+                <h4 class="content">{{bf}}</h4>
             </div>
             <div>
                 <h3>KCal</h3>
@@ -20,7 +30,7 @@
         <div class="d-flex justify-content-center lunch gap-5 mt-3">
             <div class="d-flex flex-column align-items-center lunch">
                 <h3>Lunch</h3>
-                <h4 class="lunchFood text-center">{{this.lunch}}</h4>
+                <h4 class="content text-center">{{this.lunch}}</h4>
             </div>
             <div>
                 <h3>KCal</h3>
@@ -35,26 +45,44 @@
         <div class="d-flex justify-content-center dinner gap-5 mt-3">
             <div class="d-flex flex-column align-items-center dinner">
                 <h3>Dinner</h3>
-                <h4 class="dinnerFood">{{this.dinner}}</h4>
+                <h4 class="content">{{this.dinner}}</h4>
             </div>
             <div>
                 <h3>KCal</h3>
                 <h4>{{this.dinnerKcal}}</h4>
             </div>
         </div>
-        <div class="d-flex mt-3 justify-content-center align-items-center">
-            <button routerLink="/edit-plan" (click)="sendID('dinner')" class="me-3">Edit</button>
+        <div class="d-flex mt-3 justify-content-center align-items-center mb-5">
+            <button  routerLink="/edit-plan" (click)="sendID('dinner')" class="me-3">Edit</button>
             <button (click)="completedFood('dinner')" id="dinner" class = "ms-3">Complete</button>
         </div>
+
+        <div class="d-flex justify-content-center snacks gap-5 mt-3">
+            <div class="d-flex flex-column align-items-center snacks">
+                <h3>Snacks</h3>
+                <h4 class="content">{{this.snacks}}</h4>
+            </div>
+            <div>
+                <h3>KCal</h3>
+                <h4>{{this.snacksKcal}}</h4>
+            </div>
+        </div>
+        <div>
+            <div class="d-flex mt-3 justify-content-center align-items-center">
+                <button routerLink="/edit-plan" (click)="sendID('snacks')" class="me-3">Edit</button>
+                <button (click)="completedFood('snacks')" id="snacks" class = "ms-3">Complete</button>
+            </div>
+        </div>
+
     </div>
 
     <div class="exercise-container mt-5">
         <h2 class="text-center mb-5">Today's Suggested Exercise Plan</h2>
 
-        <div class="d-flex justify-content-center breakfast gap-5">
-            <div class="d-flex flex-column align-items-center breakfast">
+        <div class="d-flex justify-content-center gap-5 resistance">
+            <div class="d-flex flex-column align-items-center resistance">
                 <h3>Cardio</h3>
-                <h4 class="breakFastFood">{{this.cardio}}</h4>
+                <h4 class="content">{{this.cardio}}</h4>
             </div>
             <div>
                 <h3>KCal</h3>
@@ -66,10 +94,10 @@
             <button (click)="completedFood('cardio')" id="cardio" class="ms-3">Complete</button>
         </div>
 
-        <div class="d-flex justify-content-center lunch gap-5 mt-3">
-            <div class="d-flex flex-column align-items-center lunch">
+        <div class="d-flex justify-content-center gap-5 mt-3 resistance">
+            <div class="d-flex flex-column align-items-center">
                 <h3>Resistance</h3>
-                <h4 class="lunchFood text-center">{{this.resistance}}</h4>
+                <h4 class="content text-center">{{this.resistance}}</h4>
             </div>
             <div>
                 <h3>KCal</h3>
@@ -83,4 +111,8 @@
             <button (click)="completedFood('resistance')" id="resistance" class="ms-3">Complete</button>
         </div>
     </div>
+</div>
+
+<div *ngIf="errorLoading">
+    No plans for today
 </div>

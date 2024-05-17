@@ -19,9 +19,11 @@ export class AdminComponent {
     foodDate: new Date(),
     lunchFood: '',
     dinnerFood: '',
+    snacks: '',
     breakfastKcal: 0,
     lunchKcal: 0,
     dinnerKcal: 0,
+    snacksKcal: 0,
     cardio:'',
     cardioKcal: 0,
     resistance: '',
@@ -46,19 +48,25 @@ export class AdminComponent {
     })
   }
 
-  showBreakfast(){
+  submitPlan(){
     console.log(this.formData)
     this.afAuth.authState.subscribe(user=>{
       if(user && user.email){
         this.formData.submittedBy = user.email;
         this.formData.memberEmail = this.member;
         this.afd.addFood(this.formData)
+        alert('Your plan has been successfully submitted')
         this.formData.breakfastFood = '';
         this.formData.lunchFood = '';
         this.formData.dinnerFood = '';
+        this.formData.snacks = '';
         this.formData.breakfastKcal = 0;
         this.formData.lunchKcal = 0;
         this.formData.dinnerKcal = 0;
+        this.formData.snacks = '';
+        this.formData.resistance = '';
+        this.formData.cardio = '';
+        this.formData.cardioKcal = 0;
       }
       this.checkComplete()
     })
@@ -72,7 +80,10 @@ export class AdminComponent {
       this.formData.lunchKcal &&
       this.formData.dinnerFood &&
       this.formData.dinnerKcal &&
-      this.formData.foodDate
+      this.formData.foodDate&&
+      this.formData.snacks&&
+      this.formData.cardio&&
+      this.formData.resistance
     ){
       this.hideButton=false
     }

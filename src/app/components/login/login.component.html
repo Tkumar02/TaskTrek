@@ -1,5 +1,9 @@
 <form (submit)="signIn(email,pw)">
-    <input name="email" type="email" [(ngModel)]="email" placeholder="Enter Email">
-    <input name='password' type="password" [(ngModel)]="pw" placeholder="Enter Password">
-    <button type="submit">Login</button>
+    <div class="main-card mt-5">
+        <div class="inner-card d-flex flex-column align-items-center gap-2">
+            <input class="mt-5" name="email" type="email" [(ngModel)]="email" placeholder="Enter Email">
+            <input name='password' type="password" [(ngModel)]="pw" placeholder="Enter Password">
+            <button class="mb-5" type="submit">Login</button>
+        </div>
+    </div>
 </form>
