@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddFoodDataService {
 
-  constructor(private afs:AngularFirestore) { }
+  constructor(private afs:AngularFirestore, private toastr: ToastrService) { }
 
   addFood(data:any){
-    return this.afs.collection('Plans').add(data)
+    return this.afs.collection('Plans').add(data).then(()=>{
+      this.toastr.success('Submitted successfully')
+      //alert('Successfully Submitted')
+    }).catch(error => {
+      this.toastr.error('Error: please try again')
+    })
   }
 
   addProfile(data:any){

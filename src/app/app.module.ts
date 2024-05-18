@@ -24,6 +24,7 @@ import { PlanTodayComponent } from './components/fitness/plan-today/plan-today.c
 import { ProfileComponent } from './components/fitness/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { GoalsPrefComponent } from './components/fitness/goals-pref/goals-pref.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { SignupComponent } from './components/signup/signup.component';
     PlanTodayComponent,
     AdminComponent,
     EditPlanComponent,
+    GoalsPrefComponent,
   ],
   imports: [
     BrowserModule,

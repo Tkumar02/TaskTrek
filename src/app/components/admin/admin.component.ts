@@ -55,7 +55,7 @@ export class AdminComponent {
         this.formData.submittedBy = user.email;
         this.formData.memberEmail = this.member;
         this.afd.addFood(this.formData)
-        alert('Your plan has been successfully submitted')
+        //alert('Your plan has been successfully submitted')
         this.formData.breakfastFood = '';
         this.formData.lunchFood = '';
         this.formData.dinnerFood = '';

@@ -4,6 +4,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { CalendarComponent } from './components/fitness/calendar/calendar.component';
 import { EditPlanComponent } from './components/fitness/edit-plan/edit-plan.component';
 import { FitnessHomeComponent } from './components/fitness/fitness-home/fitness-home.component';
+import { GoalsPrefComponent } from './components/fitness/goals-pref/goals-pref.component';
 import { PlanTodayComponent } from './components/fitness/plan-today/plan-today.component';
 import { ProfileComponent } from './components/fitness/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
@@ -19,7 +20,8 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path:'plan-today', component:PlanTodayComponent},
   {path:'edit-plan', component:EditPlanComponent},
-  {path: 'calendar', component: CalendarComponent}
+  {path: 'calendar', component: CalendarComponent},
+  {path: 'goals', component: GoalsPrefComponent}
 ];
 
 @NgModule({

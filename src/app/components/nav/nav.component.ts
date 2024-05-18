@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ToastrService } from 'ngx-toastr';
 import { AddUserService } from 'src/app/services/add-user.service';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 
@@ -13,10 +14,12 @@ export class NavComponent {
   constructor(
     private afAuth: AngularFireAuth, 
     private afUser:AddUserService,
-    private sharedService: SharedDataService,  
+    private sharedService: SharedDataService,
+    private toastr: ToastrService  
   ) { }
 
   disableLoginSignup: boolean = false;
+  disableButton: boolean = true;
   disableSignOut: boolean = true;
   userInfo:  any;
   userEmail = '';
@@ -32,6 +35,7 @@ export class NavComponent {
     this.afAuth.authState.subscribe(user=>{
       if(user && user.email){
         this.disableLoginSignup = true
+        this.disableButton = false;
         this.disableSignOut = false
         this.userEmail=user.email
         console.log(this.userEmail)
@@ -53,7 +57,7 @@ export class NavComponent {
   signOut(){
     this.afAuth.signOut()
       .then(()=>{
-        alert('You have successfully signed out!')
+        this.toastr.success('You have successfully signed out!')
         this.disableSignOut = true;
         this.disableLoginSignup = false;
         this.userName = ''

@@ -1,14 +1,14 @@
-<form>
-    <div class="d-flex flex-column justify-content-center align-items-center">
-        <div class="mb-3">
-            <label class="me-1">Name: </label>
+<form class="main-form">
+    <div class="d-flex flex-column justify-content-center align-items-center gap-2">
+        
+            <label class="me-1 mt-5">Name: </label>
             <input name="firstName" [(ngModel)]="userForm.firstName" type="text" placeholder="Please enter your name">
-        </div>
-        <div class="mb-3">
+        
+        
             <label class="me-1">Email: </label>
             <input name="email" [(ngModel)]="userForm.userEmail" type="email" placeholder="Please enter email">
-        </div>
-        <div class="mb-3">
+        
+        <div class="mb-3 d-flex flex-column align-items-center gap-2">
             <label class="me-1">Password: </label>
             <input name="password" type="password" [(ngModel)]="userPassword" placeholder="Please enter password">
         

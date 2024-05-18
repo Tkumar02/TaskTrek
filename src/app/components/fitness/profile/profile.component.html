@@ -1,7 +1,8 @@
-<h1 class="text-center mb-3" *ngIf="showName">Welcome to your profile page {{userDetails.userName}}</h1>
-<form *ngIf="!profileExists" action="submit" class="d-flex flex-column justify-content-center align-items-center gap-3">
+<!-- <h1 class="text-center mb-3" *ngIf="showName">Welcome to your profile page {{userDetails.userName}}</h1> -->
+<form *ngIf="!profileExists" action="submit" class="main-form d-flex flex-column align-items-center gap-3">
+    <h1 class="text-center mb-3 mt-2" *ngIf="showName">Welcome to your profile page {{userDetails.userName}}</h1>
     <div>
-        <h3 class="text-center">Enter Weight</h3>
+        <h3 class="text-center mt-2">Enter Weight</h3>
         <input name="weight" [(ngModel)]="weight" type="number" placeholder="weight in kg">
     </div>
     <div>

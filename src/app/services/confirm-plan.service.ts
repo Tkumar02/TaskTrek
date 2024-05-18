@@ -16,17 +16,17 @@ export class ConfirmPlanService {
 
   confirmFood(data:any){
     return this.afs.collection('Confirmed-Food').add(data).then(()=>{
-      //this.toastr.success('Submitted successfully')
-      alert('Successfully Submitted')
+      this.toastr.success('Submitted successfully')
+      //alert('Successfully Submitted')
     }).catch(error => {
       alert('Error: please try again')
     })
-  }
+  } 
 
   confirmExercise(data:any){
     return this.afs.collection('Confirmed-Exercise').add(data).then(()=>{
-      //this.toastr.success('Submitted successfully')
-      alert('Successfully Submitted')
+      this.toastr.success('Submitted successfully')
+      //alert('Successfully Submitted')
     }).catch(error => {
       alert('Error: please try again')
     })
