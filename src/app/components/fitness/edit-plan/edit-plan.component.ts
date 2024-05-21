@@ -12,12 +12,12 @@ import { SharedDataService } from 'src/app/services/shared-data.service';
   styleUrls: ['./edit-plan.component.css']
 })
 export class EditPlanComponent {
-  
+
   constructor(
     private sds: SharedDataService,
     private cps: ConfirmPlanService,
     private route: Router,
-  ){ }
+  ) { }
 
   breakfastBox: boolean = false;
   lunchBox: boolean = false;
@@ -42,7 +42,7 @@ export class EditPlanComponent {
     method: 'edited',
     user: '',
     userEmail: '',
-    ISOdate: new Date().toISOString().split('T')[0]
+    ISOdate: '',
   }
 
   submitExercise: completeExerciseForm = {
@@ -53,58 +53,60 @@ export class EditPlanComponent {
     method: 'edited',
     user: '',
     userEmail: '',
-    ISOdate: new Date().toISOString().split('T')[0]
+    ISOdate: '',
   }
 
   bForm = new FormGroup({
     bFood: new FormControl('', [Validators.required]),
-    bKcal: new FormControl('',[Validators.required]),
+    bKcal: new FormControl('', [Validators.required]),
     bDate: new FormControl(this.today)
   })
-  
+
   lForm = new FormGroup({
     lFood: new FormControl('', [Validators.required]),
-    lKcal: new FormControl('',[Validators.required]),
+    lKcal: new FormControl('', [Validators.required]),
     lDate: new FormControl(this.today)
   })
 
   dForm = new FormGroup({
     dFood: new FormControl('', [Validators.required]),
-    dKcal: new FormControl('',[Validators.required]),
+    dKcal: new FormControl('', [Validators.required]),
     dDate: new FormControl(this.today)
   })
 
   sForm = new FormGroup({
     sFood: new FormControl('', [Validators.required]),
-    sKcal: new FormControl('',[Validators.required]),
+    sKcal: new FormControl('', [Validators.required]),
     sDate: new FormControl(this.today)
   })
 
   cardioForm = new FormGroup({
     cardio: new FormControl('', [Validators.required]),
-    cardioKcal: new FormControl('',[Validators.required]),
+    cardioKcal: new FormControl('', [Validators.required]),
     cardioDate: new FormControl(this.today)
   })
 
   resForm = new FormGroup({
     resistance: new FormControl('', [Validators.required]),
-    resKcal: new FormControl('',[Validators.required]),
+    resKcal: new FormControl('', [Validators.required]),
     resDate: new FormControl(this.today)
   })
 
   ngOnInit(): void {
-    this.foodTime = this.sds.getFoodTime()
-    console.log(this.foodTime, 'foodTime')
+    this.foodTime = this.sds.getFoodTime().type;
+    this.submitExercise.ISOdate = this.sds.getFoodTime().date;
+    this.submitFood.ISOdate = this.sds.getFoodTime().date;
+    console.log('exercise', this.submitExercise.ISOdate)
+    console.log('food', this.submitExercise.ISOdate)
     const userDetails = this.sds.getUserDetails()
-    console.log(userDetails)
     this.submitFood.user = userDetails.userName
     this.submitFood.userEmail = userDetails.userEmail
     this.submitExercise.user = userDetails.userName
     this.submitExercise.userEmail = userDetails.userEmail
   }
 
-  showBox(event:any){
-    switch(event.target.id){
+  showBox(event: any) {
+    switch (event.target.id) {
       case 'breakfast':
         this.breakfastBox = !this.breakfastBox
         break;
@@ -125,50 +127,50 @@ export class EditPlanComponent {
     }
   }
 
-  get bFood(){
+  get bFood() {
     return this.bForm.get('bFood')
   }
 
-  get bKcal(){
+  get bKcal() {
     return this.bForm.get('bKcal')
   }
 
-  get lFood(){
+  get lFood() {
     return this.lForm.get('lFood')
   }
 
-  get lKcal(){
+  get lKcal() {
     return this.lForm.get('lKcal')
   }
 
-  get dFood(){
+  get dFood() {
     return this.dForm.get('dFood')
   }
 
-  get dKcal(){
+  get dKcal() {
     return this.dForm.get('dKcal')
   }
 
-  get cardio(){
+  get cardio() {
     return this.cardioForm.get('cardio')
   }
 
-  get cardioKcal(){
+  get cardioKcal() {
     return this.cardioForm.get('cardioKcal')
   }
 
-  get resistance(){
+  get resistance() {
     return this.resForm.get('resistance')
   }
 
-  get resKcal(){
+  get resKcal() {
     return this.resForm.get('resKcal')
   }
 
-  
 
-  submitEntry(foodForm:any){
-    switch(foodForm){
+
+  submitEntry(foodForm: any) {
+    switch (foodForm) {
       case 'breakfast':
         this.foodValue = this.bForm.get('bFood')
         this.kcalValue = this.bForm.get('bKcal')

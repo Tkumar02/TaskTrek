@@ -7,15 +7,15 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  email:string = ''
-  constructor(private store: AngularFirestore) {}
+  email: string = ''
+  constructor(private store: AngularFirestore) { }
   title = 'TaskTrekWeb';
-  hide:boolean = false
+  hide: boolean = false
 
-  emailReceived(value:string){
-    console.log(value)
-    this.email=value
-    if(this.email!=''){
+  emailReceived(value: string) {
+    //console.log(value)
+    this.email = value
+    if (this.email != '') {
       this.hide = true
     }
   }

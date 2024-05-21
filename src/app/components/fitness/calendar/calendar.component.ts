@@ -27,8 +27,8 @@ export class CalendarComponent {
     private cps: ConfirmPlanService,
     private sds: SharedDataService,
     private userService: AddUserService,
-  ){ }
-  
+  ) { }
+
   ngOnInit(): void {
     const today = new Date();
     //today.setDate(today.getDate()-1) 
@@ -42,26 +42,26 @@ export class CalendarComponent {
     this.userEmail = this.userDetails.userEmail
   }
 
-  getDetails(){
-    this.cps.loadLatestFoodPlan(this.userEmail, 'breakfast',this.selectedDate).subscribe(val=>{
+  getDetails() {
+    this.cps.loadLatestFoodPlan(this.userEmail, 'breakfast', this.selectedDate).subscribe(val => {
       this.lastBreakfast = val[0]
     })
-    this.cps.loadLatestFoodPlan(this.userEmail, 'lunch',this.selectedDate).subscribe(val=>{
+    this.cps.loadLatestFoodPlan(this.userEmail, 'lunch', this.selectedDate).subscribe(val => {
       this.lastLunch = val[0]
     })
-    this.cps.loadLatestFoodPlan(this.userEmail, 'dinner',this.selectedDate).subscribe(val=>{
+    this.cps.loadLatestFoodPlan(this.userEmail, 'dinner', this.selectedDate).subscribe(val => {
       this.lastDinner = val[0]
     })
-    this.cps.loadLatestFoodPlan(this.userEmail, 'snacks',this.selectedDate).subscribe(val=>{
+    this.cps.loadLatestFoodPlan(this.userEmail, 'snacks', this.selectedDate).subscribe(val => {
       this.lastSnacks = val[0]
     })
-    this.cps.loadLatestExercisePlan(this.userEmail,'resistance',this.selectedDate).subscribe(val=>{
+    this.cps.loadLatestExercisePlan(this.userEmail, 'resistance', this.selectedDate).subscribe(val => {
       this.resistance = val[0]
     })
-    this.cps.loadLatestExercisePlan(this.userEmail,'cardio',this.selectedDate).subscribe(val=>{
+    this.cps.loadLatestExercisePlan(this.userEmail, 'cardio', this.selectedDate).subscribe(val => {
       this.cardio = val[0]
     })
-    this.userService.loadProfile(this.userEmail).subscribe(val=>{
+    this.userService.loadProfile(this.userEmail).subscribe(val => {
       this.userProfile = val[0]
       //console.log(this.userProfile)
       this.showPlan = true;

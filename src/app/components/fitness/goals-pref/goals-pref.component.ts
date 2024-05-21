@@ -13,11 +13,10 @@ export class GoalsPrefComponent {
   constructor(
     private userService: AddUserService,
     private sds: SharedDataService,
-  ){}
+  ) { }
 
   getUserDetails() {
     const userDetails = this.sds.getUserDetails()
-    console.log(userDetails)
     this.goalsData.userName = userDetails.userName
     this.goalsData.userEmail = userDetails.userEmail
   }
@@ -32,22 +31,22 @@ export class GoalsPrefComponent {
 
   disableButton: boolean = true;
 
-  checkButton(){
-    if(this.goalsData.goals.length>10 && this.goalsData.preferences.length>10){
+  checkButton() {
+    if (this.goalsData.goals.length > 10 && this.goalsData.preferences.length > 10) {
       this.disableButton = false;
     }
-    else{
+    else {
       this.disableButton = true;
     }
   }
 
-  resetForm(){
+  resetForm() {
     this.goalsData.goals = '';
     this.goalsData.preferences = '';
   }
 
-  async addData(data:any){
-    try{
+  async addData(data: any) {
+    try {
       await this.getUserDetails();
       await this.userService.addGoals(data);
       await this.resetForm();
