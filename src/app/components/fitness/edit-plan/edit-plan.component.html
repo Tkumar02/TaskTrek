@@ -51,7 +51,7 @@
         <textarea id="s-food" formControlName="sFood" type="text"></textarea>
         <label for="kcal">Update kcal</label>
         <input id="s-kcal" formControlName="sKcal" type="number">
-        <button [disabled]="dForm.invalid" type="submit" class="mb-5">Submit</button>
+        <button [disabled]="sForm.invalid" type="submit" class="mb-5">Submit</button>
     </form>
 
     <button *ngIf="this.foodTime=='cardio'" id="cardio" (click)="showBox($event)">Edit Cardio</button>

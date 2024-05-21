@@ -1,10 +1,14 @@
-<form class="main-page d-flex flex-column align-items-center gap-2 text-center" action="submit">
+<form *ngIf="goalsData.userName" class="main-page d-flex flex-column align-items-center gap-2 text-center" action="submit">
     
         <label class="mt-5" for="goals">Enter what your goals are below: </label>
-        <textarea name="goals" id="goals"></textarea>
+        <textarea (keyup)="checkButton()" minlength="10" [(ngModel)]="goalsData.goals" name="goals" id="goals"></textarea>
     
         <label for="pref">Enter  your food preferences below, and what you like to avoid: </label>
-        <textarea name="pref" id="pref"></textarea>
+        <textarea (keyup)="checkButton()" minlength="10" [(ngModel)]="goalsData.preferences" name="pref" id="pref"></textarea>
     
-    <button>Submit</button>
+    <button [disabled]="disableButton" (click)="addData(goalsData)">Submit</button>
 </form>
+
+<div *ngIf="!goalsData.userName">
+    <div>Please Log-in or Sign up to see this page</div>
+</div>

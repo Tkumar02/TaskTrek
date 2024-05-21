@@ -110,6 +110,10 @@
             <button (click)="sendID('resistance')" routerLink="/edit-plan" class="me-3">Edit</button>
             <button (click)="completedFood('resistance')" id="resistance" class="ms-3">Complete</button>
         </div>
+        <div class="notes d-flex flex-column mt-3 justify-content-center align-items-center" *ngIf="notes">
+            <h3>Notes</h3>
+            <p>{{this.notes}}</p>
+        </div>
     </div>
 </div>
 

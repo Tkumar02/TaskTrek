@@ -44,6 +44,7 @@ export class PlanTodayComponent {
   cardioKcal: number = 0;
   resistance: string = '';
   resistanceKcal: number = 0;
+  notes: string = ''
   planDate = ''
 
   completeForm: completeFoodForm = {
@@ -74,47 +75,60 @@ export class PlanTodayComponent {
       if(user && user.email){
         this.currentUserEmail = user.email
         this.completeForm.userEmail = this.currentUserEmail
-        const userDetails = this.sds.getUserDetails()
-        this.completeForm.user = userDetails.userName
-        this.completeExercise.user = userDetails.userName
-        this.completeExercise.userEmail = userDetails.userEmail
+        // const userDetails = this.sds.getUserDetails()
+        // this.completeForm.user = userDetails.userName
+        // this.completeExercise.user = userDetails.userName
+        console.log(this.currentUserEmail)
       }
       this.todayDate = this.today.toISOString().split('T')[0], this.today
 
       this.foodService.loadAllPlans(this.currentUserEmail).subscribe((val:any)=>{
         const allPlans = val;
-        console.log(allPlans)
+        //console.log(allPlans)
         for(let i=0;i<allPlans.length;i++){
           this.plans.push(allPlans[i].foodDate)
         }
-        console.log(this.plans)
+        //console.log(this.plans)
+        this.loadPlan()
       })
-
-      this.loadPlan()
     })
   }
 
+  
+
   loadPlan(){
-    this.foodService.loadPlan(this.todayDate, this.currentUserEmail)
-    .subscribe(val=>{
-      this.todayPlan = val[0]
-      this.planDate = this.todayPlan.foodDate;
-      //console.log(this.planDate)
-      this.bf = this.todayPlan.breakfastFood
-      this.bfKcal = this.todayPlan.breakfastKcal
-      this.lunch = this.todayPlan.lunchFood
-      this.lunchKcal = this.todayPlan.lunchKcal
-      this.dinner = this.todayPlan.dinnerFood
-      this.dinnerKcal = this.todayPlan.dinnerKcal
-      this.snacks = this.todayPlan.snacks
-      this.snacksKcal = this.todayPlan.snacksKcal
-      this.cardio = this.todayPlan.cardio
-      this.cardioKcal = this.todayPlan.cardioKcal
-      this.resistance = this.todayPlan.resistance
-      this.resistanceKcal = this.todayPlan.resistanceKcal
-    })
-    //console.log(this.errorLoading, this.planDate, this.todayDate)
-    
+    if(this.plans.includes(this.todayDate)){
+      this.errorLoading = false
+      this.foodService.loadPlan(this.todayDate, this.currentUserEmail)
+      .subscribe(val=>{
+        this.todayPlan = val[0]
+        this.planDate = this.todayPlan.foodDate;
+        this.bf = this.todayPlan.breakfastFood
+        this.bfKcal = this.todayPlan.breakfastKcal
+        this.lunch = this.todayPlan.lunchFood
+        this.lunchKcal = this.todayPlan.lunchKcal
+        this.dinner = this.todayPlan.dinnerFood
+        this.dinnerKcal = this.todayPlan.dinnerKcal
+        this.snacks = this.todayPlan.snacks
+        this.snacksKcal = this.todayPlan.snacksKcal
+        this.cardio = this.todayPlan.cardio
+        this.cardioKcal = this.todayPlan.cardioKcal
+        this.resistance = this.todayPlan.resistance
+        this.resistanceKcal = this.todayPlan.resistanceKcal
+        if(this.todayPlan.notesReq){
+          this.notes = this.todayPlan.notes
+        }
+        else{
+          this.notes = '';
+        }
+      })
+    }
+    else{
+      this.errorLoading = true;
+    }
+    const userDetails = this.sds.getUserDetails()
+    this.completeForm.user = userDetails.userName
+    console.log(this.completeForm.user)
   }
 
 
@@ -196,14 +210,6 @@ export class PlanTodayComponent {
     else{
       this.errorLoading = true;
     }
-    //console.log('back', currentDate,date)
-    // if((currentDate.getTime()-date.getTime())!==86400000){
-    //   this.errorLoading = true;
-    // }
-    // else{
-    //   //console.log('works')
-    //   this.errorLoading = false;
-    // }
   }
 
   goForward(today:string){
@@ -220,14 +226,5 @@ export class PlanTodayComponent {
     else{
       this.errorLoading = true;
     }
-    //const currentDate = new Date(this.planDate)
-    //console.log('forward', date,currentDate)
-    // if((date.getTime()-currentDate.getTime())!==86400000){
-    //   this.errorLoading = true;
-    // }
-    // else{
-    //   //console.log('works')
-    //   this.errorLoading = false;
-    // }
   }
 }

@@ -12,10 +12,10 @@ import { SharedDataService } from 'src/app/services/shared-data.service';
 export class NavComponent {
 
   constructor(
-    private afAuth: AngularFireAuth, 
+    private afAuth: AngularFireAuth,
     private afUser:AddUserService,
     private sharedService: SharedDataService,
-    private toastr: ToastrService  
+    private toastr: ToastrService
   ) { }
 
   disableLoginSignup: boolean = false;
@@ -29,7 +29,9 @@ export class NavComponent {
     userName: '',
     userId: '',
     userEmail: '',
+    loggedIn: false,
   }
+  userRoute = '/fitness-home'
 
   ngOnInit(): void{
     this.afAuth.authState.subscribe(user=>{
@@ -38,7 +40,10 @@ export class NavComponent {
         this.disableButton = false;
         this.disableSignOut = false
         this.userEmail=user.email
-        console.log(this.userEmail)
+        if(this.userEmail == 'admin@mail.com'){
+          this.userRoute = '/admin'
+        }
+        //console.log(this.userEmail)
         this.afUser.loadUser(this.userEmail).subscribe(val=>{
           this.userInfo = val[0];
           if(this.userInfo.userEmail==this.userEmail){
@@ -47,6 +52,7 @@ export class NavComponent {
             this.userDetails.userName = this.userName
             this.userDetails.userId = user.uid
             this.userDetails.userEmail = this.userEmail
+            this.userDetails.loggedIn = true;
             this.sharedService.setUserDetails(this.userDetails)
           }
         })
@@ -60,9 +66,10 @@ export class NavComponent {
         this.toastr.success('You have successfully signed out!')
         this.disableSignOut = true;
         this.disableLoginSignup = false;
-        this.userName = ''
-        this.userInfo = ''
-        this.userEmail = ''
+        this.userName = '';
+        this.userInfo = '';
+        this.userEmail = '';
+        this.disableButton = true;
       })
   }
 }

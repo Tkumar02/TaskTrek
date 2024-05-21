@@ -1,16 +1,16 @@
 <!-- <h1 class="text-center mb-3" *ngIf="showName">Welcome to your profile page {{userDetails.userName}}</h1> -->
-<form *ngIf="!profileExists" action="submit" class="main-form d-flex flex-column align-items-center gap-3">
+<form *ngIf="!profileExists && userDetails.userName" action="submit" class="main-form d-flex flex-column align-items-center gap-3">
     <h1 class="text-center mb-3 mt-2" *ngIf="showName">Welcome to your profile page {{userDetails.userName}}</h1>
     <div>
-        <h3 class="text-center mt-2">Enter Weight</h3>
+        <h3 class="text-center mt-2">Enter Weight in kg</h3>
         <input name="weight" [(ngModel)]="weight" type="number" placeholder="weight in kg">
     </div>
     <div>
-        <h3 class="text-center">Enter height</h3>
+        <h3 class="text-center">Enter height in cm</h3>
         <input name="height" [(ngModel)]="height" type="number" placeholder="height in cm">
     </div>
     <div>
-        <h3 class="text-center">Enter Age</h3>
+        <h3 class="text-center">Enter Age in years</h3>
         <input name="age" [(ngModel)]="age" type="number" placeholder="Age">
     </div>
     <div class="d-flex flex-column align-items-center">
@@ -32,4 +32,6 @@
     <h2>Current BMR: {{currentBMR}}</h2>
     <button (click)="showForm()">Update Profile</button>
 </div>
+
+
 

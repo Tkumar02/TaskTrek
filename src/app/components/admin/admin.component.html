@@ -48,7 +48,7 @@
                 <input class="kcalBox" (keyup)="checkComplete()"  type="number" [(ngModel)]="formData.snacksKcal" name="snacks_kcal">
             </div>
             <div class="d-flex flex-column align-items-center">
-                <label for="dinner">Cardio: </label>
+                <label for="cardio">Cardio: </label>
                 <input class="foodDesc" (keyup)="checkComplete()" type="text" name="cardio" [(ngModel)]="formData.cardio">
             </div>
             <div class="d-flex flex-column align-items-center">
@@ -56,14 +56,21 @@
                 <input class="kcalBox" (keyup)="checkComplete()"  type="number" [(ngModel)]="formData.cardioKcal" name="cardio_kcal">
             </div>
             <div class="d-flex flex-column align-items-center">
-                <label for="dinner">Resistance: </label>
+                <label for="resistance">Resistance: </label>
                 <input class="foodDesc" (keyup)="checkComplete()" type="text" name="resistance" [(ngModel)]="formData.resistance">
-            </div>
-            <div class="d-flex flex-column align-items-center">
-                <label for="resistance_kcal">Kcal: </label>
-                <input class="kcalBox" (keyup)="checkComplete()"  type="number" [(ngModel)]="formData.resistanceKcal" name="resistance_kcal">
-            </div>
         </div>
+        <div class="d-flex flex-column align-items-center">
+            <label for="resistance_kcal">Kcal: </label>
+            <input class="kcalBox" (keyup)="checkComplete()"  type="number" [(ngModel)]="formData.resistanceKcal" name="resistance_kcal">
+         </div>
+         <div class="d-flex justify-content-center">
+            <label for="notesReq">Notes: </label>
+            <input [(ngModel)]="formData.notesReq" class="ms-2" (keyup)="checkComplete()" type="checkbox" name="notesReq" [(ngModel)]="formData.notesReq">
+        </div>
+        <div *ngIf="formData.notesReq">
+            <textarea [(ngModel)]="formData.notes" name="notes" id="notes" placeholder="Enter any notes here"></textarea>
+        </div>
+    </div>
         <button class="mt-2" [disabled]="hideButton" (click)="submitPlan()">Submit</button>
     </div>
 </div>

@@ -18,6 +18,14 @@ export class AddUserService {
     })
   }
 
+  addGoals(data:any){
+    return this.afs.collection('Goals').add(data).then(()=>{
+      this.toastr.success('Submitted successfully')
+    }).catch(error=>{
+      this.toastr.error('Error: please try again')
+    })
+  }
+
   loadUser(userEmail:any){
     return this.afs.collection('User',ref=>ref.where('userEmail','==',userEmail)).valueChanges()
   }

@@ -36,6 +36,8 @@ export class ProfileComponent {
     date: new Date()
   }
 
+  loggedIn = false;
+
   ngOnInit(): void{
     this.userDetails = this.shareData.getUserDetails()
     //console.log(this.userDetails, 'profile component')

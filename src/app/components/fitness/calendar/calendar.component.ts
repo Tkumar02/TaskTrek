@@ -53,7 +53,7 @@ export class CalendarComponent {
       this.lastDinner = val[0]
     })
     this.cps.loadLatestFoodPlan(this.userEmail, 'snacks',this.selectedDate).subscribe(val=>{
-      this.lastDinner = val[0]
+      this.lastSnacks = val[0]
     })
     this.cps.loadLatestExercisePlan(this.userEmail,'resistance',this.selectedDate).subscribe(val=>{
       this.resistance = val[0]
