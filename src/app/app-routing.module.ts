@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { UserSummaryComponent } from './components/admin/user-summary/user-summary.component';
 import { CalendarComponent } from './components/fitness/calendar/calendar.component';
 import { EditPlanComponent } from './components/fitness/edit-plan/edit-plan.component';
 import { FitnessHomeComponent } from './components/fitness/fitness-home/fitness-home.component';
@@ -16,12 +18,14 @@ const routes: Routes = [
   {path:'fitness-home', component:FitnessHomeComponent},
   {path: 'login', component:LoginComponent},
   {path:'signup', component:SignupComponent},
-  {path: 'admin', component:AdminComponent},
+  {path: 'admin-plan', component:AdminComponent},
   {path: 'profile', component: ProfileComponent},
   {path:'plan-today', component:PlanTodayComponent},
   {path:'edit-plan', component:EditPlanComponent},
   {path: 'calendar', component: CalendarComponent},
-  {path: 'goals', component: GoalsPrefComponent}
+  {path: 'goals', component: GoalsPrefComponent},
+  {path: 'admin-home', component: AdminHomeComponent},
+  {path:'admin-user-summary', component: UserSummaryComponent}
 ];
 
 @NgModule({

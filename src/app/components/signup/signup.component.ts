@@ -27,15 +27,22 @@ export class SignupComponent {
       .then((userCredential)=>{
         const user = userCredential.user
         console.log('successfully signed up!')
+        this.route.navigate(['/profile'])
+        this.userService.addUser(this.userForm)
       })
       .catch((error)=>{
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode,errorMessage)
+        console.log(errorCode,errorMessage);
+        alert(errorMessage)
+        this.userForm.firstName = '';
+        this.userForm.userEmail = '';
+        this.userPassword = '';
+        this.confirmPassword = '';
       })
-    this.userService.addUser(this.userForm)
+    
     //alert('You have successfully signed up')
-    this.route.navigate(['/profile'])
+    
     }
     else{
       alert('Passwords do not match')

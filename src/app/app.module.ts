@@ -25,6 +25,8 @@ import { ProfileComponent } from './components/fitness/profile/profile.component
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { GoalsPrefComponent } from './components/fitness/goals-pref/goals-pref.component';
+import { UserSummaryComponent } from './components/admin/user-summary/user-summary.component';
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { GoalsPrefComponent } from './components/fitness/goals-pref/goals-pref.c
     AdminComponent,
     EditPlanComponent,
     GoalsPrefComponent,
+    UserSummaryComponent,
+    AdminHomeComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,49 @@
+<div class="main-container d-flex flex-column align-items-center gap-3">
+    <h2 class="title mt-2">Select a user</h2>
+    <select [(ngModel)]="selectedUser" name="users" id="user">
+        <option *ngFor="let user of users" [value]="user.userEmail">{{user.userEmail}} - {{user.firstName}}</option>
+    </select>
+    <button (click)="loadFood()">Load User Summary</button>
+    <div *ngIf="this.foodArray.length>0" class="data d-flex flex-column align-items-center justify-content-center">
+        <h2>Individual Breakdown</h2>
+        <table border="1" class="mb-3">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Meal Time</th>
+                    <th>Calories</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of foodArray">
+                    <td>{{item.date}}</td>
+                    <td>Breakfast</td>
+                    <td>{{item.bkcals}}</td>
+                </tr>
+                <tr *ngFor="let item of foodArray">
+                    <td>{{item.date}}</td>
+                    <td>Lunch</td>
+                    <td>{{item.lkcals}}</td>
+                </tr>
+                <tr *ngFor="let item of foodArray">
+                    <td>{{item.date}}</td>
+                    <td>Dinner</td>
+                    <td>{{item.dkcals}}</td>
+                </tr>
+                <tr *ngFor="let item of foodArray">
+                    <td>{{item.date}}</td>
+                    <td>Snacks</td>
+                    <td>{{item.skcals}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Total calories by day:</h3>
+        <p *ngFor="let date of dates, let i=index">{{dates[i]}} - {{foodArray[i].bkcals+foodArray[i].lkcals+foodArray[i].dkcals+foodArray[i].skcals}}</p>
+        <h3>Total calories by meal time: </h3>
+        <h6 class="text-center"> <span>from</span> {{dates[0]}} <span>until</span> {{dates[dates.length-1]}}</h6>
+        <p>Total breakfast calories: {{bKcals}}</p>
+        <p>Total lunch calories: {{lKcals}}</p>
+        <p>Total dinner calories: {{dKcals}}</p>
+        <p>Total snacks calories: {{sKcals}}</p>
+    </div>
+</div>

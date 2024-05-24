@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { User, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "f
 
 export class LoginComponent {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private toastr: ToastrService) {}
 
   auth = getAuth();
   email: string = '';
@@ -32,11 +33,12 @@ export class LoginComponent {
     // Signed in
         const user = userCredential.user;
         if(user.email=='admin@mail.com'){
-          this.router.navigate(['/admin'])
+          this.router.navigate(['/admin-home'])
         }
         else(
           this.router.navigate(['/fitness-home'])
         )
+        this.toastr.success('You have successfully logged in')
     })
     .catch((error) => {
       const errorCode = error.code;

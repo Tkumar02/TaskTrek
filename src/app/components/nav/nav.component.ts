@@ -41,7 +41,7 @@ export class NavComponent {
         this.disableSignOut = false
         this.userEmail = user.email
         if (this.userEmail == 'admin@mail.com') {
-          this.userRoute = '/admin'
+          this.userRoute = '/admin-home'
         }
         else {
           this.userRoute = '/fitness-home'

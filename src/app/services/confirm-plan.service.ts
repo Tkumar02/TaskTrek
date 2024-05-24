@@ -47,6 +47,16 @@ export class ConfirmPlanService {
       )
   }
 
+  loadAllConfirmedFood(email:any){
+    return this.afs.collection('Confirmed-Food', ref=>ref.where('userEmail','==',email))
+    .valueChanges().pipe(
+      catchError(error=>{
+        console.error('Load all confirmed plans error', error)
+        return throwError(()=>'Error')
+      })
+    )
+  }
+
   loadLatestExercisePlan(email:any, exercise:string, date:string){
     return this.afs.collection('Confirmed-Exercise',ref=>ref.where('userEmail','==',email).where('ISOdate','==',date).where('type','==',exercise).orderBy('date','desc').limit(1)).valueChanges()
   }

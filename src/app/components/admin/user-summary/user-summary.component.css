@@ -1,0 +1,23 @@
+.main-container{
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: lightgrey;
+    color: darkgreen;
+}
+
+option{
+    text-align: center;
+}
+
+.title{
+    color: darkgreen;
+}
+
+table{
+    width:98vw;
+    text-align: center;
+}
+
+span{
+    font-style: italic;
+}
