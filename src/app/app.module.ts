@@ -27,6 +27,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { GoalsPrefComponent } from './components/fitness/goals-pref/goals-pref.component';
 import { UserSummaryComponent } from './components/admin/user-summary/user-summary.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
+import { AdminEditPlanComponent } from './components/admin/admin-edit-plan/admin-edit-plan.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { AdminHomeComponent } from './components/admin/admin-home/admin-home.com
     GoalsPrefComponent,
     UserSummaryComponent,
     AdminHomeComponent,
+    AdminEditPlanComponent,
   ],
   imports: [
     BrowserModule,

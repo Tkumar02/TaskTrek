@@ -12,7 +12,12 @@ import { AddUserService } from 'src/app/services/add-user.service';
 
 export class AdminComponent {
   
-  constructor(private afd:AddFoodDataService, private afAuth: AngularFireAuth, private user: AddUserService) { }
+  constructor(
+    private afd:AddFoodDataService, 
+    private afAuth: AngularFireAuth, 
+    private user: AddUserService,
+  ) 
+    { }
   
 
   formData: adminPlan = {
@@ -39,6 +44,10 @@ export class AdminComponent {
   public member: any;
   public hideButton = true;
   showNotes = false;
+  allPlans: any[] = [];
+  plansLoaded = false;
+  activePlanIndex: number | null = null;
+  confirmDeleteIndex: number = -1;
 
   ngOnInit(): void{
     this.afAuth.authState.subscribe(user=>{
@@ -53,30 +62,7 @@ export class AdminComponent {
     })
   }
 
-  // submitPlan(){
-  //   console.log(this.formData)
-  //   this.afAuth.authState.subscribe(user=>{
-  //     if(user && user.email){
-  //       this.formData.submittedBy = user.email;
-  //       this.formData.memberEmail = this.member;
-  //       this.afd.addFood(this.formData)
-  //       //alert('Your plan has been successfully submitted')
-  //       this.formData.breakfastFood = '';
-  //       this.formData.lunchFood = '';
-  //       this.formData.dinnerFood = '';
-  //       this.formData.snacks = '';
-  //       this.formData.breakfastKcal = 0;
-  //       this.formData.lunchKcal = 0;
-  //       this.formData.dinnerKcal = 0;
-  //       this.formData.snacksKcal = 0;
-  //       this.formData.resistance = '';
-  //       this.formData.cardio = '';
-  //       this.formData.cardioKcal = 0;
-  //       this.formData.notes = '';
-  //     }
-  //     this.checkComplete()
-  //   })
-  // }
+
   assignMember(){
     this.formData.memberEmail = this.member
   }
@@ -106,6 +92,16 @@ export class AdminComponent {
       this.formData.notes = '';
   }
 
+  loadCompletedPlans(){
+    if(this.member !== "-----------")
+    console.log('changed', this.member)
+    this.afd.loadAllPlans(this.member).subscribe(val=>{
+      this.allPlans = val
+      console.log(val)
+      this.plansLoaded = true;
+    })
+  }
+
   checkComplete(){
     if(this.formData.breakfastFood &&
       this.formData.breakfastKcal &&
@@ -125,5 +121,22 @@ export class AdminComponent {
       this.hideButton = true;
     }
   }
+
+  viewPlan(i:number){
+    if(this.activePlanIndex === i){
+      this.activePlanIndex = null;
+    } else {
+      this.activePlanIndex = i;
+    }
+  }
+
+  // deletePlan(date:string,i:number){
+  //     this.activePlanIndex = null;
+  //     this.afd.deletePlan(this.member,date)
+  // }
+
+  // checkDelete(i:number){
+  //   this.confirmDeleteIndex = i
+  // }
 
 }

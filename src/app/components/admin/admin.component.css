@@ -8,3 +8,24 @@
     text-align: center;
     margin-bottom: 20px;
 }
+
+.main-container{
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: darkred;
+    color: blanchedalmond;
+}
+
+button{
+    border-radius: 25%;
+}
+
+.warning{
+    background-color: black;
+    color: red;
+}
+
+.view{
+    background-color: green;
+    color: white;
+}

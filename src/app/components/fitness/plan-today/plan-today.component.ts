@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { ngbCompleteTransition } from '@ng-bootstrap/ng-bootstrap/util/transition/ngbTransition';
 import { completeExerciseForm } from 'src/app/interfaces/completeExercise';
 import { completeFoodForm } from 'src/app/interfaces/completeFood';
 import { AddFoodDataService } from 'src/app/services/add-food-data.service';
@@ -137,7 +136,7 @@ export class PlanTodayComponent {
     const userDetails = this.sds.getUserDetails()
     this.completeForm.user = userDetails.userName
     this.completeExercise.user = userDetails.userName
-    console.log(this.completeForm.user)
+    //console.log(this.completeForm.user)
   }
 
 

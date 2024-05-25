@@ -1,0 +1,55 @@
+<div class="main-container">
+    <h3>Plan for {{planDate}}</h3>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h5>Breakfast</h5>
+        <div class="d-flex gap-3">
+            <p>{{bf}}</p>
+        <p>{{bfKcal}}</p>
+        </div>
+    </div>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h5>Lunch</h5>
+        <div class="d-flex gap-3">
+            <p>{{lunch}}</p>
+        <p>{{lunchKcal}}</p>
+        </div>
+    </div>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h5>Dinner</h5>
+        <div class="d-flex gap-3">
+            <p>{{dinner}}</p>
+        <p>{{dinnerKcal}}</p>
+        </div>
+    </div>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h5>Snacks</h5>
+        <div class="d-flex gap-3">
+            <p>{{snacks}}</p>
+        <p>{{snacksKcal}}</p>
+        </div>
+    </div>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h5>Cardio</h5>
+        <div class="d-flex gap-3">
+            <p>{{cardio}}</p>
+        <p>{{cardioKcal}}</p>
+        </div>
+    </div>
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h5>Resistance</h5>
+        <div class="d-flex gap-3">
+            <p>{{resistance}}</p>
+        <p>{{resistanceKcal}}</p>
+        </div>
+    </div>
+    <div *ngIf="todayPlan.notesReq" class="d-flex flex-column justify-content-center align-items-center">
+        <h5>Notes</h5>
+        <p>{{notes}}</p>
+    </div>
+    <div class="d-flex flex-column justify-content-center align-items-center mb-5">
+        <button class="delete" (click)="checkDelete()">Delete</button>
+    </div>
+    <div class="mb-5 d-flex flex-column align-items-center" *ngIf="confirmDelete">
+        <button class="confirmDelete" (click)="deletePlan()">Confirm Delete</button>
+    </div>
+</div>

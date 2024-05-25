@@ -34,4 +34,23 @@ export class AddFoodDataService {
     return this.afs.collection('Plans', ref=>ref.where('memberEmail','==',user)).valueChanges()
   }
 
+  deletePlan(memberEmail:string, date:string){
+    let docID = ''
+    this.afs.collection('Plans',ref=>ref
+    .where('memberEmail','==',memberEmail)
+    .where('foodDate','==',date))
+    .get().subscribe(querySnapshot=>{
+      querySnapshot.forEach(doc=>{
+        docID = doc.id
+      })
+      console.log('Document ID: ', docID)
+      this.afs.collection('Plans').doc(docID).delete()
+      .then(()=>{
+        this.toastr.success('Plan successfully deleted');
+      }).catch((error)=>{
+        this.toastr.error('Error, please try again', error)
+      })
+    })
+  }
+
 }

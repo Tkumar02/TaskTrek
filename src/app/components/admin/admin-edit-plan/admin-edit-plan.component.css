@@ -1,0 +1,13 @@
+.main-container{
+    color: gold
+}
+
+.delete{
+    color: red;
+}
+
+.confirmDelete{
+    background-color: black;
+    color: red;
+    border-radius: 25%;
+}
