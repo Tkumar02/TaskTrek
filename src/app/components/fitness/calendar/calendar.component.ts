@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AddUserService } from 'src/app/services/add-user.service';
 import { ConfirmPlanService } from 'src/app/services/confirm-plan.service';
 import { SharedDataService } from 'src/app/services/shared-data.service';
@@ -9,6 +9,8 @@ import { SharedDataService } from 'src/app/services/shared-data.service';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent {
+
+  @Input() parentUserEmail: string;
 
   maxDate: string = '';
   selectedDate: any;
@@ -22,6 +24,7 @@ export class CalendarComponent {
   userDetails: any;
   userProfile: any;
   showPlan: boolean = false;
+  buttonPressed = false;
 
   constructor(
     private cps: ConfirmPlanService,
@@ -30,6 +33,14 @@ export class CalendarComponent {
   ) { }
 
   ngOnInit(): void {
+    if(this.parentUserEmail){
+      this.userEmail = this.parentUserEmail;
+    }
+    else{
+      this.userDetails = this.sds.getUserDetails()
+      this.userEmail = this.userDetails.userEmail
+    }
+    console.log(this.userEmail)
     const today = new Date();
     //today.setDate(today.getDate()-1) 
     const year = today.getFullYear();
@@ -37,12 +48,10 @@ export class CalendarComponent {
     const day = ('0' + today.getDate()).slice(-2); // Add leading zero
 
     this.maxDate = `${year}-${month}-${day}`;
-
-    this.userDetails = this.sds.getUserDetails()
-    this.userEmail = this.userDetails.userEmail
   }
 
   getDetails() {
+    this.buttonPressed = true;
     this.cps.loadLatestFoodPlan(this.userEmail, 'breakfast', this.selectedDate).subscribe(val => {
       this.lastBreakfast = val[0]
     })

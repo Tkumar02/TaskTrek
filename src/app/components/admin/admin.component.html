@@ -5,24 +5,34 @@
         <h3>Select User</h3>
         <select (change)="checkComplete()" (change)="loadCompletedPlans()" [(ngModel)]="member" name="user">
             <option class="text-center">-----------</option>
-            <option *ngFor="let user of users" 
+            <option *ngFor="let user of users"
             [value]="user.userEmail"
             >{{user.firstName}} - {{user.userEmail}}</option>
         </select>
     </div>
-    <div *ngIf="plansLoaded"  class="d-flex flex-column align-items-center">
+
+    <!-- <div *ngIf="plansLoaded"  class="d-flex flex-column align-items-center">
         <h4>Dates of completed Plans</h4>
         <div class="mb-2" *ngFor="let date of allPlans, let i=index">
             <div class="d-flex gap-3">
             <p>{{allPlans[i].foodDate}} </p>
             <button class="view" (click)="viewPlan(i)">View</button>
-            <!-- <button class="warning" (click)="checkDelete(i)">Delete</button>
-            <div *ngIf="confirmDeleteIndex === i">
-                <button class="warning" (click)="deletePlan(allPlans[i].foodDate,i)">Confirm Delete</button>
-            </div> -->
             </div>
             <div class="view-plan w-100" *ngIf="activePlanIndex === i">
                 <app-admin-edit-plan [planDate]="allPlans[i].foodDate" [member]="member" class="mb-5"></app-admin-edit-plan>
+            </div>
+        </div>
+    </div> -->
+
+    <div *ngIf="plansLoaded"  class="d-flex flex-column align-items-center">
+        <h4>Dates of completed Plans</h4>
+        <div class="mb-2" *ngFor="let date of dates, let i=index">
+            <div class="d-flex gap-3">
+            <p>{{date}} </p>
+            <button class="view" (click)="viewPlan(i)">View</button>
+            </div>
+            <div class="view-plan w-100" *ngIf="activePlanIndex === i">
+                <app-admin-edit-plan (sendState)="receiveState($event)" [planDate]="date" [member]="member" class="mb-5"></app-admin-edit-plan>
             </div>
         </div>
     </div>
@@ -30,7 +40,7 @@
     <div class="mainBody d-flex flex-column align-items-center mt-2 mb-5">
         <div>
             <label class="me-2" for="foodDate">Date: </label>
-            <input (change)="checkComplete()" type="date" name="foodDate" [(ngModel)]="formData.foodDate">
+            <input (change)="checkComplete()" type="date" [min]="todayDate"  name="foodDate" [(ngModel)]="formData.foodDate">
         </div>
         <div class="foodBody mt-2">
             <div class="d-flex flex-column align-items-center mt-3">

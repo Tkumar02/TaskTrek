@@ -21,3 +21,8 @@ table{
 span{
     font-style: italic;
 }
+
+.balance{
+    color: darkgreen;
+    font-weight: bold;
+}

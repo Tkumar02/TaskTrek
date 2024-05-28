@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { firstValueFrom } from 'rxjs';
 import { adminPlan } from 'src/app/interfaces/adminPlan';
 import { AddFoodDataService } from 'src/app/services/add-food-data.service';
 import { AddUserService } from 'src/app/services/add-user.service';
@@ -48,6 +49,8 @@ export class AdminComponent {
   plansLoaded = false;
   activePlanIndex: number | null = null;
   confirmDeleteIndex: number = -1;
+  dates: any[] = []
+  todayDate = '';
 
   ngOnInit(): void{
     this.afAuth.authState.subscribe(user=>{
@@ -57,11 +60,26 @@ export class AdminComponent {
       }
     })
 
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0
+    const year = today.getFullYear();
+
+    this.todayDate = `${year}-${month}-${day}`;
+
     this.user.loadUsers().subscribe(val=>{
       this.users = val
     })
   }
 
+  //some hacky stuff coming from admin-edit-plan - fix it later
+  async receiveState(data:string){
+    if(data == 'deleted'){
+      this.dates = []
+      await this.loadCompletedPlans()
+      alert('Plan successfully deleted')
+    }
+  }
 
   assignMember(){
     this.formData.memberEmail = this.member
@@ -71,9 +89,13 @@ export class AdminComponent {
       await(this.assignMember())
       await this.afd.addFood(this.formData)
       await this.resetForm()
+      this.dates = []
       this.checkComplete()
     } catch (error) {
       console.error('Admin Error: ', error)
+    } 
+    finally {
+      this.loadCompletedPlans()
     }
   }
 
@@ -92,14 +114,31 @@ export class AdminComponent {
       this.formData.notes = '';
   }
 
-  loadCompletedPlans(){
+  async loadCompletedPlans(){
+    this.dates = [];
+
     if(this.member !== "-----------")
-    console.log('changed', this.member)
     this.afd.loadAllPlans(this.member).subscribe(val=>{
       this.allPlans = val
-      console.log(val)
       this.plansLoaded = true;
     })
+
+    const trial1 = await firstValueFrom(this.afd.loadAllPlans(this.member))
+    for (let plan of this.allPlans){
+      this.dates.push(plan.foodDate)
+    }
+    this.dates.sort((a: string, b: string) => {
+        return new Date(a).getTime() - new Date(b).getTime();
+    });
+
+    // this.allPlans = await firstValueFrom(this.afd.loadAllPlans(this.member))
+    // this.plansLoaded = true
+    // for(let plan of this.allPlans){
+    //     this.dates.push(plan.foodDate)
+    //   }
+    //   this.dates.sort((a: string, b: string) => {
+    //     return new Date(a).getTime() - new Date(b).getTime();
+    //   });
   }
 
   checkComplete(){
@@ -129,14 +168,5 @@ export class AdminComponent {
       this.activePlanIndex = i;
     }
   }
-
-  // deletePlan(date:string,i:number){
-  //     this.activePlanIndex = null;
-  //     this.afd.deletePlan(this.member,date)
-  // }
-
-  // checkDelete(i:number){
-  //   this.confirmDeleteIndex = i
-  // }
 
 }

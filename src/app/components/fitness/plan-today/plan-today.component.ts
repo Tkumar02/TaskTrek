@@ -46,6 +46,7 @@ export class PlanTodayComponent {
   resistanceKcal: number = 0;
   notes: string = ''
   planDate = ''
+  future = false;
 
   completeForm: completeFoodForm = {
     food: '',
@@ -213,6 +214,12 @@ export class PlanTodayComponent {
   goBack(today: string) {
     const date = new Date(today)
     date.setTime(date.getTime() - 86400000)
+    if(date>new Date()){
+      this.future = true;
+    }
+    else{
+      this.future = false;
+    }
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0')
@@ -230,6 +237,12 @@ export class PlanTodayComponent {
   goForward(today: string) {
     const date = new Date(today)
     date.setTime(date.getTime() + 86400000)
+    if(date>new Date()){
+      this.future = true;
+    }
+    else{
+      this.future = false;
+    }
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0')

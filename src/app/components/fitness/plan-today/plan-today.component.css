@@ -63,3 +63,7 @@ button{
 .notes{
     color: red;
 }
+
+:disabled{
+    color: grey;
+}

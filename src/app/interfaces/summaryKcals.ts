@@ -1,11 +1,11 @@
 export interface dayKcals {
     date: string;
-    bkcals: number;
-    lkcals: number;
-    dkcals: number;
-    skcals?: number;
-    ckcals?: number;
-    rkcals?: number;
-    totalInputKcals: number;
-    totalOutputKcals: number;
+    bkcals: any;
+    lkcals: any;
+    dkcals: any;
+    skcals?: any;
+    ckcals?: any;
+    rkcals?: any;
+    totalInputKcals: any;
+    totalOutputKcals: any;
 }

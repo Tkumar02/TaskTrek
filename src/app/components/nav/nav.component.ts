@@ -63,6 +63,12 @@ export class NavComponent {
     })
   }
 
+  closeNavbar(navbar: any) {
+    if (navbar && navbar.classList.contains('show')) {
+      navbar.classList.remove('show');
+    }
+  }
+  
   signOut() {
     this.afAuth.signOut()
       .then(() => {

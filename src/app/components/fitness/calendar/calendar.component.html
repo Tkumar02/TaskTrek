@@ -1,15 +1,15 @@
-<div *ngIf="userDetails.userName" class="main-body d-flex flex-column align-items-center mt-2">
+<div *ngIf="this.userEmail" class="main-body d-flex flex-column align-items-center mt-2">
     <div class="title d-flex flex-column align-items-center mb-2">
         <h2>Select a date to view summary</h2>
         <input [(ngModel)]="selectedDate" type="date" [max]="maxDate">
         <button (click)="getDetails()">Confirm Date</button>
     </div>
-    <div *ngIf="this.showPlan" class="main-content">
+    <div *ngIf="this.showPlan && (this.lastBreakfast || this.lastLunch || this.lastDinner || this.lastSnacks || this.cardio || this.resistance)" class="main-content">
         <p>Total breakfast calories: {{this.lastBreakfast.kcal}} - ({{this.lastBreakfast.food}})</p>
         <p>Total lunch calories: {{this.lastLunch.kcal}} - ({{this.lastLunch.food}})</p>
         <p>Total dinner calories: {{this.lastDinner.kcal}} - ({{this.lastDinner.food}})</p>
         <p>Total snacks calories: {{this.lastSnacks.kcal}} - ({{this.lastSnacks.food}})</p>
-        <h6>Total intake calories for the date: {{this.lastBreakfast.kcal+this.lastLunch.kcal+this.lastDinner.kcal + this.lastSnacks.kcal}}</h6>
+        <h6>Total intake calories {{selectedDate}}: {{this.lastBreakfast.kcal+this.lastLunch.kcal+this.lastDinner.kcal + this.lastSnacks.kcal}}</h6>
         <p>Total calories burned during cardio: {{this.cardio.kcal}}</p>
         <p>Total calories burned during resistance training: {{this.resistance.kcal}}</p>
         <h6>Total burnt calories: {{this.resistance.kcal+this.cardio.kcal}}</h6>
@@ -17,5 +17,8 @@
         <h3>Total calorie balance: {{this.lastBreakfast.kcal+this.lastLunch.kcal+this.lastDinner.kcal + this.lastSnacks.kcal 
                                     - this.resistance.kcal+this.cardio.kcal 
                                     - this.userProfile.bmr | number:'1.0-0'}}</h3>
+    </div>
+    <div *ngIf="!this.lastBreakfast && !this.lastBreakfast && !this.lastBreakfast && !this.lastBreakfast && !this.cardio && !this.resistance && buttonPressed">
+        No data for this day
     </div>
 </div>

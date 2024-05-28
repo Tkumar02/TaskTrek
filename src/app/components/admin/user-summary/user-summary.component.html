@@ -1,6 +1,7 @@
 <div class="main-container d-flex flex-column align-items-center gap-3">
     <h2 class="title mt-2">Select a user</h2>
     <select [(ngModel)]="selectedUser" name="users" id="user">
+        <option value="selectedUser">{{selectedUser}}</option>
         <option *ngFor="let user of users" [value]="user.userEmail">{{user.userEmail}} - {{user.firstName}}</option>
     </select>
     <button (click)="loadFood()">Load User Summary</button>
@@ -37,13 +38,37 @@
                 </tr>
             </tbody>
         </table>
+
         <h3>Total calories by day:</h3>
-        <p *ngFor="let date of dates, let i=index">{{dates[i]}} - {{foodArray[i].bkcals+foodArray[i].lkcals+foodArray[i].dkcals+foodArray[i].skcals}}</p>
-        <h3>Total calories by meal time: </h3>
+        <div *ngFor="let date of dates, let i=index">
+            <p *ngIf="foodArray[i].bkcals == 'data incomplete' || foodArray[i].lkcals == 'data incomplete' || foodArray[i].dkcals == 'data incomplete' || foodArray[i].skcals == 'data incomplete'">
+                {{date}} - Data incomplete for Food calories
+            </p>
+            <p *ngIf="foodArray[i].bkcals != 'data incomplete' && foodArray[i].lkcals != 'data incomplete' && foodArray[i].dkcals != 'data incomplete' && foodArray[i].skcals != 'data incomplete'">
+                {{date}} - (Calories consumed) - {{foodArray[i].bkcals+foodArray[i].lkcals+foodArray[i].dkcals+foodArray[i].skcals}}
+            </p>
+            <p *ngIf="exerciseArray[i].ckcals == 'data incomplete' || foodArray[i].dkcals == 'data incomplete' ">
+                {{date}} - Data incomplete for Exercise Calories
+            </p>
+            <div *ngIf="exerciseArray[i].ckcals != 'data incomplete' && exerciseArray[i].rkcals != 'data incomplete'">
+                {{date}} - (Calories burned) - {{exerciseArray[i].ckcals+exerciseArray[i].rkcals}}
+                <p class="balance">Calorie balance: {{foodArray[i].bkcals+foodArray[i].lkcals+foodArray[i].dkcals+foodArray[i].skcals - exerciseArray[i].ckcals - exerciseArray[i].rkcals}}</p>
+            </div>
+        </div>
+        
+        <h3>Total calories input / output: </h3>
         <h6 class="text-center"> <span>from</span> {{dates[0]}} <span>until</span> {{dates[dates.length-1]}}</h6>
         <p>Total breakfast calories: {{bKcals}}</p>
         <p>Total lunch calories: {{lKcals}}</p>
         <p>Total dinner calories: {{dKcals}}</p>
         <p>Total snacks calories: {{sKcals}}</p>
+        <p>Total cardio calories: -{{cKcals}}</p>
+        <p>Total resistance calories: -{{rKcals}}</p>
+
+        <div>
+            <button (click)="viewCalendar()">Load Calendar View</button>
+            <app-calendar *ngIf="calendarView" [parentUserEmail]="userEmailFromParent"></app-calendar>
+        </div>
+
     </div>
 </div>

@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { AddFoodDataService } from 'src/app/services/add-food-data.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class AdminEditPlanComponent {
   ) {  }
   @Input() planDate: string;
   @Input() member: string;
+  @Output() sendState = new EventEmitter<string>();
 
   plans: any[];
   currentUserEmail = '';
@@ -32,9 +34,13 @@ export class AdminEditPlanComponent {
   cardioKcal: number = 0;
   resistance: string = '';
   resistanceKcal: number = 0;
-  notes: string = ''
+  notes: string = '';
+  notesReq: false;
 
   confirmDelete = false;
+  message= ''
+  prePlans: any;
+  postPlans: any;
 
   ngOnInit(): void{
     this.loadPlan()
@@ -44,7 +50,7 @@ export class AdminEditPlanComponent {
     this.foodService.loadPlan(this.planDate, this.member)
       .subscribe(val => {
         this.todayPlan = val[0]
-        console.log(this.todayPlan)
+        console.log(this.todayPlan,this.planDate, 'here?')
         this.bf = this.todayPlan.breakfastFood
         this.bfKcal = this.todayPlan.breakfastKcal
         this.lunch = this.todayPlan.lunchFood
@@ -57,7 +63,8 @@ export class AdminEditPlanComponent {
         this.cardioKcal = this.todayPlan.cardioKcal
         this.resistance = this.todayPlan.resistance
         this.resistanceKcal = this.todayPlan.resistanceKcal
-        if (this.todayPlan.notesReq) {
+        this.notesReq = this.todayPlan.notesReq
+        if (this.notesReq) {
           this.notes = this.todayPlan.notes
         }
         else {
@@ -71,7 +78,27 @@ export class AdminEditPlanComponent {
     this.confirmDelete = !this.confirmDelete;
   }
 
-  deletePlan(){
-    this.foodService.deletePlan(this.member,this.planDate)
+  //VERY HACKY WAY TO DO THIS - FIX IT IN THE FUTURE
+  async confirmDeletePlan(): Promise<void>{
+    this.prePlans = await firstValueFrom(this.foodService.loadAllPlans(this.member))
+    return new Promise((resolve,reject)=>{
+      try{
+      this.foodService.deletePlan(this.member,this.planDate)
+          setTimeout(()=>{
+            resolve();
+          },1000)
+        }
+        catch(error) {
+          reject(error)
+        }
+    })
+  }
+
+  async deletePlan(){
+    await this.confirmDeletePlan()
+    this.postPlans = await firstValueFrom(this.foodService.loadAllPlans(this.member))
+    console.log('done?',this.prePlans.length, this.postPlans.length)
+    this.message = 'deleted'
+    this.sendState.emit(this.message)
   }
 }
