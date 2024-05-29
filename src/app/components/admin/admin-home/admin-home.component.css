@@ -1,3 +1,27 @@
 a{
     text-decoration: none;
 }
+
+.main-container{
+    min-height: 100vh;
+    background-image: url("/assets/bg-pic.jpg");
+}
+
+.main-container > h1 {
+    color: lightblue;
+}
+
+.menu-items{
+    padding: 5px;
+    background-color: rgba(63, 61, 58, 0.5);
+    color: aquamarine;
+    text-decoration: aqua;
+}
+
+a{
+    color: gold;
+}
+
+a:hover{
+    color: lightseagreen;
+}
