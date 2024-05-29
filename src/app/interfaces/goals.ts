@@ -1,6 +1,7 @@
 export interface goalsForm{
     goals:string,
-    preferences: string,
+    foodPref: string,
+    exercisePref: string,
     date: Date,
     userName: string,
     userEmail: string,

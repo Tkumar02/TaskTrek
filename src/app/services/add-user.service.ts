@@ -23,7 +23,12 @@ export class AddUserService {
       this.toastr.success('Submitted successfully')
     }).catch(error=>{
       this.toastr.error('Error: please try again')
+      console.error(error)
     })
+  }
+
+  loadGoals(userEmail:any){
+    return this.afs.collection('Goals', ref=>ref.where('userEmail','==',userEmail)).valueChanges()
   }
 
   loadUser(userEmail:any){

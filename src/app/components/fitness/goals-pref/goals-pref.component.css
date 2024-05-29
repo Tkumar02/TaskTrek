@@ -3,3 +3,9 @@
     min-width: 100vw;
     background-color: lightskyblue;
 }
+
+.info{
+    font-style: italic;
+    color: white;
+    font-weight: lighter;
+}

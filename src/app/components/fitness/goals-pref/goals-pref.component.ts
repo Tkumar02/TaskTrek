@@ -15,6 +15,10 @@ export class GoalsPrefComponent {
     private sds: SharedDataService,
   ) { }
 
+  ngOnInit(): void {
+    this.getUserDetails()
+  }
+
   getUserDetails() {
     const userDetails = this.sds.getUserDetails()
     this.goalsData.userName = userDetails.userName
@@ -23,7 +27,8 @@ export class GoalsPrefComponent {
 
   goalsData: goalsForm = {
     goals: '',
-    preferences: '',
+    foodPref: '',
+    exercisePref: '',
     date: new Date(),
     userName: '',
     userEmail: '',
@@ -32,25 +37,32 @@ export class GoalsPrefComponent {
   disableButton: boolean = true;
 
   checkButton() {
-    if (this.goalsData.goals.length > 10 && this.goalsData.preferences.length > 10) {
-      this.disableButton = false;
-    }
+    if (
+      this.goalsData.goals.length > 10 && 
+      this.goalsData.foodPref.length > 10 && 
+      this.goalsData.exercisePref.length > 10) 
+      {
+        this.disableButton = false;
+      }
     else {
       this.disableButton = true;
     }
   }
 
+  
+
   resetForm() {
     this.goalsData.goals = '';
-    this.goalsData.preferences = '';
+    this.goalsData.foodPref = '';
+    this.goalsData.exercisePref = '';
   }
 
   async addData(data: any) {
     try {
-      await this.getUserDetails();
+      this.getUserDetails();
       await this.userService.addGoals(data);
-      await this.resetForm();
-      await this.checkButton();
+      this.resetForm();
+      this.checkButton();
     } catch (error) {
       console.error('Goals ERROR: ', error)
     }

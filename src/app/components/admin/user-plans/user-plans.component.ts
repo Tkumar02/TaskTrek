@@ -6,13 +6,11 @@ import { AddFoodDataService } from 'src/app/services/add-food-data.service';
 import { AddUserService } from 'src/app/services/add-user.service';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  selector: 'app-user-plans',
+  templateUrl: './user-plans.component.html',
+  styleUrls: ['./user-plans.component.css']
 })
-
-export class AdminComponent {
-  
+export class UserPlansComponent {
   constructor(
     private afd:AddFoodDataService, 
     private afAuth: AngularFireAuth, 
@@ -168,5 +166,4 @@ export class AdminComponent {
       this.activePlanIndex = i;
     }
   }
-
 }

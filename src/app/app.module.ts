@@ -17,17 +17,19 @@ import { NavComponent } from './components/nav/nav.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
-import { AdminComponent } from './components/admin/admin.component';
+import { AdminEditPlanComponent } from './components/admin/admin-edit-plan/admin-edit-plan.component';
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
+import { AdminComponent } from './components/admin/archive/admin.component';
+import { UserPlansComponent } from './components/admin/user-plans/user-plans.component';
+import { UserProfileComponent } from './components/admin/user-profile/user-profile.component';
+import { UserSummaryComponent } from './components/admin/user-summary/user-summary.component';
 import { CalendarComponent } from './components/fitness/calendar/calendar.component';
 import { EditPlanComponent } from './components/fitness/edit-plan/edit-plan.component';
+import { GoalsPrefComponent } from './components/fitness/goals-pref/goals-pref.component';
 import { PlanTodayComponent } from './components/fitness/plan-today/plan-today.component';
 import { ProfileComponent } from './components/fitness/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { GoalsPrefComponent } from './components/fitness/goals-pref/goals-pref.component';
-import { UserSummaryComponent } from './components/admin/user-summary/user-summary.component';
-import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
-import { AdminEditPlanComponent } from './components/admin/admin-edit-plan/admin-edit-plan.component';
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import { AdminEditPlanComponent } from './components/admin/admin-edit-plan/admin
     UserSummaryComponent,
     AdminHomeComponent,
     AdminEditPlanComponent,
+    UserProfileComponent,
+    UserPlansComponent,
   ],
   imports: [
     BrowserModule,

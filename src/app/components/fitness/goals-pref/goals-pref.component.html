@@ -2,10 +2,16 @@
     
         <label class="mt-5" for="goals">Enter what your goals are below: </label>
         <textarea (keyup)="checkButton()" minlength="10" [(ngModel)]="goalsData.goals" name="goals" id="goals"></textarea>
-    
-        <label for="pref">Enter  your food preferences below, and what you like to avoid: </label>
-        <textarea (keyup)="checkButton()" minlength="10" [(ngModel)]="goalsData.preferences" name="pref" id="pref"></textarea>
-    
+        <p *ngIf="goalsData.goals.length<10" class="info">minimum 10 characters</p>
+
+        <label for="prefFood">Enter  your food preferences below, (what you like and want to avoid): </label>
+        <textarea (keyup)="checkButton()" minlength="10" [(ngModel)]="goalsData.foodPref" name="pref" id="pref"></textarea>
+        <p *ngIf="goalsData.foodPref.length<10" class="info">minimum 10 characters</p>
+
+        <label for="prefExercise">Enter  your exercise preferences below, (what you like and want to avoid): </label>
+        <textarea (keyup)="checkButton()" minlength="10" [(ngModel)]="goalsData.exercisePref" name="pref" id="pref"></textarea>
+        <p *ngIf="goalsData.exercisePref.length<10" class="info">minimum 10 characters</p>
+
     <button [disabled]="disableButton" (click)="addData(goalsData)">Submit</button>
 </form>
 

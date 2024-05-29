@@ -1,0 +1,99 @@
+COPIED TO ADMIN: USER-PLANS
+Was originally in components/admin
+
+<!-- <h1>Plan Page</h1>
+<form *ngIf="!hide" action="submit">
+<div class=" main-container">
+    <div class="d-flex flex-column align-items-center">
+        <h3>Select User</h3>
+        <select (change)="checkComplete()" (change)="loadCompletedPlans()" [(ngModel)]="member" name="user">
+            <option class="text-center">-----------</option>
+            <option *ngFor="let user of users"
+            [value]="user.userEmail"
+            >{{user.firstName}} - {{user.userEmail}}</option>
+        </select>
+    </div>
+
+    <div *ngIf="plansLoaded"  class="d-flex flex-column align-items-center">
+        <h4>Dates of completed Plans</h4>
+        <div class="mb-2" *ngFor="let date of dates, let i=index">
+            <div class="d-flex gap-3">
+            <p>{{date}} </p>
+            <button class="view" (click)="viewPlan(i)">View</button>
+            </div>
+            <div class="view-plan w-100" *ngIf="activePlanIndex === i">
+                <app-admin-edit-plan (sendState)="receiveState($event)" [planDate]="date" [member]="member" class="mb-5"></app-admin-edit-plan>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mainBody d-flex flex-column align-items-center mt-2 mb-5">
+        <div>
+            <label class="me-2" for="foodDate">Date: </label>
+            <input (change)="checkComplete()" type="date" [min]="todayDate"  name="foodDate" [(ngModel)]="formData.foodDate">
+        </div>
+        <div class="foodBody mt-2">
+            <div class="d-flex flex-column align-items-center mt-3">
+                <label for="breakfast">Breakfast: </label>
+                <textarea class="foodDesc" (keyup)="checkComplete()" type="text" name="breakfast" [(ngModel)]="formData.breakfastFood"></textarea>
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="breakfast_kcal">Kcal: </label>
+                <input class="kcalBox" (keyup)="checkComplete()" type="number" [(ngModel)]="formData.breakfastKcal" name="breakfast_kcal">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="lunch">Lunch: </label>
+                <input class="foodDesc" (keyup)="checkComplete()" type="text" name="lunch" [(ngModel)]="formData.lunchFood">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="lunch_kcal">Kcal: </label>
+                <input class="kcalBox" (keyup)="checkComplete()" [(ngModel)]="formData.lunchKcal" type="number" name="lunch_kcal">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="dinner">Dinner: </label>
+                <input class="foodDesc" (keyup)="checkComplete()" type="text" name="dinner" [(ngModel)]="formData.dinnerFood">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="dinner_kcal">Kcal: </label>
+                <input class="kcalBox" (keyup)="checkComplete()"  type="number" [(ngModel)]="formData.dinnerKcal" name="dinner_kcal">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="snacks">Snacks: </label>
+                <input class="foodDesc" (keyup)="checkComplete()" type="text" name="snacks" [(ngModel)]="formData.snacks">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="snacks_kcal">Kcal: </label>
+                <input class="kcalBox" (keyup)="checkComplete()"  type="number" [(ngModel)]="formData.snacksKcal" name="snacks_kcal">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="cardio">Cardio: </label>
+                <input class="foodDesc" (keyup)="checkComplete()" type="text" name="cardio" [(ngModel)]="formData.cardio">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="cardio_kcal">Kcal: </label>
+                <input class="kcalBox" (keyup)="checkComplete()"  type="number" [(ngModel)]="formData.cardioKcal" name="cardio_kcal">
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <label for="resistance">Resistance: </label>
+                <input class="foodDesc" (keyup)="checkComplete()" type="text" name="resistance" [(ngModel)]="formData.resistance">
+        </div>
+        <div class="d-flex flex-column align-items-center">
+            <label for="resistance_kcal">Kcal: </label>
+            <input class="kcalBox" (keyup)="checkComplete()"  type="number" [(ngModel)]="formData.resistanceKcal" name="resistance_kcal">
+         </div>
+         <div class="d-flex justify-content-center">
+            <label for="notesReq">Notes: </label>
+            <input [(ngModel)]="formData.notesReq" class="ms-2" (keyup)="checkComplete()" type="checkbox" name="notesReq" [(ngModel)]="formData.notesReq">
+        </div>
+        <div *ngIf="formData.notesReq">
+            <textarea [(ngModel)]="formData.notes" name="notes" id="notes" placeholder="Enter any notes here"></textarea>
+        </div>
+    </div>
+        <button class="mt-2" [disabled]="hideButton" (click)="submitPlan()">Submit</button>
+    </div>
+</div>
+</form>
+
+<div *ngIf="hide">
+    ONLY ADMIN USERS CAN ACCESS THIS PAGE
+</div> -->

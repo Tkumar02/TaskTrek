@@ -1,0 +1,42 @@
+<div class="main-container d-flex flex-column align-items-center">
+    <h3 class="mt-3">Select User</h3>
+    <select [(ngModel)]="selectedUser" name="users" (change)="selectUser()" id="user">
+        <option class="text-center">---Users---</option>
+        <option *ngFor="let user of users" [value]="user.userEmail" >
+            {{user.userEmail}} - {{user.firstName}}
+        </option>
+    </select>
+    <div class="d-flex gap-2 justify-content-center mt-2">
+        <button [disabled]="selectedUser=='---Users---'" (click)="loadProfile()">View Profile</button>
+        <button [disabled]="selectedUser=='---Users---'" (click)="loadGoals()">View Goals and Preferences</button>
+    </div>
+
+    <div *ngIf="profileSelected">
+        <div class="profile mb-2 mt-2" *ngFor="let profile of profiles">
+            <p class="mt-3">Weight: {{profile.weight}}</p>
+            <p>BMR: {{profile.bmr | number:'1.0-0'}}</p>
+            <p>Date: {{profile.date.toMillis() | date:'medium'}} </p>
+        </div>
+    </div>
+
+    <div *ngIf="goalsSelected">
+        <div class="goals mb-2 mt-2" *ngFor="let goal of goals">
+            <h6  class="mt-1">Goal: </h6>
+                <p>{{goal.goals}}</p>
+            <h6>Food:</h6> 
+                <p>{{goal.foodPref}}</p>
+            <h6>Exercise:</h6> 
+                <p>{{goal.exercisePref}}</p>
+            <h6>Date: </h6>
+                <p>{{goal.date.toMillis() | date:'medium'}} </p>
+        </div>
+    </div>
+
+    <div *ngIf="profileSelected && profiles.length<1">
+        <p>No profile provided for this user</p>
+    </div>
+
+    <div class="noInfo" *ngIf="goalsSelected && goals.length<1">
+        <p>No goals / preferences entered for this user</p>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+.profile{
+    border: 10px solid darkblue;
+    text-align: center;
+    color: darkblue;
+    background-color: cyan;
+    font-weight: 500;
+    padding: 5px;
+}
+
+.goals{
+    border: 10px solid turquoise;
+    text-align: center;
+    color: turquoise;
+    background-color: palevioletred;
+    padding: 5px;
+}
+
+.goals > p{
+    font-style: italic;
+}
+
+.noInfo{
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+    max-height: 50vh;
+    min-width: 100vw;
+    font-weight: 1000;
+    color: brown;
+}
